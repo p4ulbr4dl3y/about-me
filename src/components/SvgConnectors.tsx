@@ -3,36 +3,22 @@ export function FlowArrow() {
 }
 
 export function BranchConnector() {
-  return (
-    <div className="branch-connector">
-      <div className="branch-line branch-line-down" />
-      <div className="branch-split">
-        <div className="branch-arm branch-arm-left">
-          <div className="branch-arm-line" />
-          <div className="branch-arm-arrow" />
-        </div>
-        <div className="branch-arm branch-arm-right">
-          <div className="branch-arm-line" />
-          <div className="branch-arm-arrow" />
-        </div>
-      </div>
-    </div>
-  )
+  return <div className="flow-arrow" />
 }
 
 export function MergeConnector2() {
   return (
     <div className="merge-connector-2">
       <div className="merge-split">
-        <div className="merge-arm merge-arm-left">
+        <div className="merge-arm">
           <div className="merge-arm-line" />
         </div>
-        <div className="merge-arm merge-arm-right">
+        <div className="merge-arm">
           <div className="merge-arm-line" />
         </div>
       </div>
       <div className="merge-bar" />
-      <div className="merge-line merge-line-down" />
+      <div className="merge-line-down" />
       <div className="merge-arrow" />
     </div>
   )
@@ -56,7 +42,7 @@ export function MergeConnector4() {
         </div>
       </div>
       <div className="merge-bar" />
-      <div className="merge-line merge-line-down" />
+      <div className="merge-line-down" />
       <div className="merge-arrow" />
     </div>
   )
@@ -64,9 +50,12 @@ export function MergeConnector4() {
 
 export function BranchLines({ left, right }: { left: React.ReactNode; right: React.ReactNode }) {
   return (
-    <div className="branch-lines">
-      <div className="branch-left">{left}</div>
-      <div className="branch-right">{right}</div>
+    <div className="branch-lines-wrapper">
+      <div className="branch-horizontal-bar" />
+      <div className="branch-lines">
+        <div className="branch-left">{left}</div>
+        <div className="branch-right">{right}</div>
+      </div>
     </div>
   )
 }
