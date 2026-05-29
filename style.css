@@ -1,18 +1,25 @@
+/* ========================================
+   SkillsMP-Inspired Portfolio Theme
+   ======================================== */
+
 :root {
-    --bg-color: #0f172a;
-    --card-bg: #1e293b;
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --accent: #38bdf8;
-    --accent-hover: #0ea5e9;
-    --border: #334155;
+    --bg-color: #0a0a0a;
+    --card-bg: #111;
+    --text-primary: #ededed;
+    --text-secondary: #a3a3a3;
+    --accent: #d99178;
+    --accent-hover: #c57f66;
+    --accent-secondary: #f59e0b;
+    --border: #606068;
+    --muted: #262626;
+    --radius: 0.625rem;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -20,16 +27,94 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
+    position: relative;
 }
 
+/* Grid Background Pattern */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.03;
+    background-image:
+        linear-gradient(to right, var(--text-primary) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--text-primary) 1px, transparent 1px);
+    background-size: 32px 32px;
+}
+
+/* ========================================
+   Navigation
+   ======================================== */
+.site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+}
+
+.nav-logo span {
+    color: var(--accent);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: var(--text-primary);
+}
+
+/* ========================================
+   Hero Section
+   ======================================== */
 header.hero {
-    min-height: 60vh;
+    position: relative;
+    min-height: 70vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4rem 2rem;
-    background: linear-gradient(180deg, #020617 0%, var(--bg-color) 100%);
+    padding: 8rem 2rem 4rem;
     border-bottom: 1px solid var(--border);
+    z-index: 1;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10, 10, 10, 0) 0%, rgba(10, 10, 10, 0.4) 100%);
+    pointer-events: none;
 }
 
 .hero-content {
@@ -37,13 +122,15 @@ header.hero {
     align-items: center;
     justify-content: space-between;
     gap: 4rem;
-    max-width: 1000px;
+    max-width: 1100px;
     width: 100%;
+    position: relative;
+    z-index: 1;
 }
 
 @media (max-width: 768px) {
     .hero-content {
-        flex-direction: column-reverse; /* Text on bottom, image on top for mobile */
+        flex-direction: column-reverse;
         text-align: center;
         gap: 2rem;
     }
@@ -54,17 +141,16 @@ header.hero {
     position: relative;
 }
 
-/* Add a decorative background element to make it look intentional */
 .avatar-container::before {
     content: '';
     position: absolute;
-    top: 15px;
-    left: 15px;
-    right: -15px;
-    bottom: -15px;
-    background-color: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 24px;
+    top: 12px;
+    left: 12px;
+    right: -12px;
+    bottom: -12px;
+    background: linear-gradient(135deg, rgba(217, 145, 120, 0.1) 0%, transparent 100%);
+    border: 1px solid rgba(217, 145, 120, 0.2);
+    border-radius: 20px;
     z-index: 0;
     transition: all 0.3s ease;
 }
@@ -72,46 +158,48 @@ header.hero {
 .avatar {
     position: relative;
     z-index: 1;
-    max-width: 280px;
+    max-width: 260px;
     height: auto;
-    border-radius: 20px;
+    border-radius: 16px;
     object-fit: cover;
     border: 2px solid var(--border);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .avatar-container:hover::before {
-    top: 20px;
-    left: 20px;
-    background-color: rgba(56, 189, 248, 0.1);
+    top: 16px;
+    left: 16px;
     border-color: var(--accent);
+    background: linear-gradient(135deg, rgba(217, 145, 120, 0.15) 0%, transparent 100%);
 }
 
 .avatar-container:hover .avatar {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
     border-color: var(--accent);
 }
 
 .hero-text h1 {
-    font-size: 3rem;
-    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 3.5rem;
+    font-weight: 800;
+    letter-spacing: -2px;
     margin-bottom: 0.5rem;
-    background: linear-gradient(90deg, #fff, var(--accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text-primary);
 }
 
-.subtitle {
-    font-size: 1.25rem;
+.hero-text .subtitle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
     color: var(--accent);
     font-weight: 600;
     margin-bottom: 1.5rem;
+    letter-spacing: -0.3px;
 }
 
 .location-age {
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
     margin-bottom: 1.5rem;
     flex-wrap: wrap;
 }
@@ -124,17 +212,24 @@ header.hero {
 
 .badge {
     background-color: var(--card-bg);
-    padding: 0.4rem 1rem;
+    padding: 0.35rem 0.9rem;
     border-radius: 20px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     border: 1px solid var(--border);
     color: var(--text-secondary);
+    transition: all 0.2s ease;
+}
+
+.badge:hover {
+    border-color: var(--accent);
+    color: var(--text-primary);
 }
 
 .bio {
     color: var(--text-secondary);
-    font-size: 1.1rem;
-    max-width: 600px;
+    font-size: 1.05rem;
+    max-width: 550px;
+    line-height: 1.7;
 }
 
 .bio p {
@@ -145,17 +240,32 @@ header.hero {
     margin-bottom: 0;
 }
 
+/* ========================================
+   Main Content
+   ======================================== */
 main {
-    max-width: 1200px;
+    position: relative;
+    z-index: 1;
+    max-width: 1280px;
     margin: 0 auto;
-    padding: 4rem 0; /* Changed horizontal padding to 0 for full-width marquee */
+    padding: 0;
+}
+
+/* ========================================
+   Skills Section
+   ======================================== */
+.skills-section {
+    padding: 5rem 0 4rem;
 }
 
 .skills-section h2 {
-    font-size: 2.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2.2rem;
     text-align: center;
     margin-bottom: 3rem;
-    font-weight: 700;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: var(--text-primary);
 }
 
 /* Marquee Styles */
@@ -168,7 +278,7 @@ main {
     margin-right: -50vw;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.25rem;
     overflow: hidden;
     mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
     -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
@@ -192,11 +302,10 @@ main {
 
 .marquee-content {
     display: flex;
-    gap: 1.5rem;
-    padding-right: 1.5rem;
+    gap: 1rem;
+    padding-right: 1rem;
 }
 
-/* Animations */
 .track-left {
     animation: scroll-left 40s linear infinite;
 }
@@ -218,26 +327,26 @@ main {
 .skill-card {
     background-color: var(--card-bg);
     border: 1px solid var(--border);
-    border-radius: 50px; /* Pill shape */
-    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    padding: 0.65rem 1.25rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
-    transition: all 0.3s ease;
+    gap: 0.65rem;
+    transition: all 0.2s ease;
     white-space: nowrap;
     cursor: default;
 }
 
 .skill-card:hover {
-    transform: scale(1.05);
+    transform: scale(1.05) translateY(-2px);
     border-color: var(--accent);
-    box-shadow: 0 5px 15px rgba(56, 189, 248, 0.2);
+    box-shadow: 0 5px 15px rgba(217, 145, 120, 0.15);
 }
 
 .skill-card img {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     object-fit: contain;
 }
 
@@ -245,16 +354,18 @@ main {
     filter: invert(1) brightness(2);
 }
 
-/* Projects Section Styles */
+/* ========================================
+   Projects Section
+   ======================================== */
 .projects-section {
-    margin-top: 6rem;
-    padding: 0;
+    margin-top: 5rem;
+    padding: 0 0 6rem;
 }
 
 .projects-container {
     display: flex;
     overflow-x: auto;
-    gap: 3rem;
+    gap: 2.5rem;
     scroll-snap-type: x mandatory;
     padding: 2rem calc(50vw - 550px);
     scrollbar-width: none;
@@ -267,32 +378,33 @@ main {
 
 .section-header {
     text-align: center;
-    margin-bottom: 3.5rem;
+    margin-bottom: 3rem;
     padding: 0 2rem;
 }
 
 .section-header h2 {
-    font-size: 2.5rem;
-    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -1px;
     margin-bottom: 0.5rem;
 }
 
 .section-subtitle {
     color: var(--text-secondary);
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     max-width: 600px;
     margin: 0 auto;
+    line-height: 1.6;
 }
 
 .project-card {
     flex: 0 0 1100px;
     scroll-snap-align: center;
-    background-color: rgba(30, 41, 59, 0.3);
+    background-color: var(--card-bg);
     border: 1px solid var(--border);
-    border-radius: 24px;
-    padding: 3rem;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 2.5rem;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     transition: border-color 0.3s ease;
 }
@@ -300,34 +412,36 @@ main {
 @media (max-width: 1150px) {
     .projects-container {
         padding: 2rem 5vw;
-        gap: 2rem;
+        gap: 1.5rem;
     }
     .project-card {
         flex: 0 0 90vw;
-        padding: 2rem;
+        padding: 1.5rem;
     }
 }
 
 .project-card:hover {
-    border-color: rgba(56, 189, 248, 0.3);
+    border-color: rgba(217, 145, 120, 0.3);
 }
 
 .project-header {
     border-bottom: 1px solid var(--border);
-    padding-bottom: 2rem;
-    margin-bottom: 2.5rem;
+    padding-bottom: 1.75rem;
+    margin-bottom: 2rem;
 }
 
 .project-title-area h3 {
-    font-size: 2.2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.8rem;
     font-weight: 700;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.6rem;
     color: var(--text-primary);
+    letter-spacing: -0.5px;
 }
 
 .project-desc-short {
     color: var(--text-secondary);
-    font-size: 1.15rem;
+    font-size: 1.05rem;
     line-height: 1.5;
     max-width: 800px;
 }
@@ -335,21 +449,21 @@ main {
 .project-grid {
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
-    gap: 3.5rem;
+    gap: 3rem;
 }
 
 @media (max-width: 1024px) {
     .project-grid {
         grid-template-columns: 1fr;
-        gap: 3rem;
+        gap: 2.5rem;
     }
 }
 
 .project-info-side h4 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 600;
     color: var(--text-primary);
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -358,20 +472,20 @@ main {
 .project-info-side h4::before {
     content: '';
     display: inline-block;
-    width: 6px;
-    height: 1.3rem;
+    width: 5px;
+    height: 1.2rem;
     background-color: var(--accent);
     border-radius: 4px;
 }
 
 .project-full-desc {
     color: var(--text-secondary);
-    font-size: 1.05rem;
-    line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.65;
 }
 
 .project-full-desc p {
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
 }
 
 .project-full-desc p:last-child {
@@ -380,15 +494,15 @@ main {
 
 /* Tags */
 .project-tag {
-    background-color: rgba(56, 189, 248, 0.1);
+    background-color: rgba(217, 145, 120, 0.08);
     color: var(--accent);
-    padding: 0.3rem 0.8rem;
+    padding: 0.25rem 0.75rem;
     border-radius: 20px;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    border: 1px solid rgba(56, 189, 248, 0.2);
+    border: 1px solid rgba(217, 145, 120, 0.2);
     display: inline-block;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.6rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
 }
@@ -396,17 +510,17 @@ main {
 .tech-stack-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1.5rem;
+    gap: 0.4rem;
+    margin-top: 1.25rem;
 }
 
 .tech-tag {
-    background-color: rgba(15, 23, 42, 0.6);
+    background-color: var(--muted);
     border: 1px solid var(--border);
     color: var(--text-secondary);
-    padding: 0.4rem 0.8rem;
+    padding: 0.35rem 0.7rem;
     border-radius: 8px;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     transition: all 0.2s ease;
 }
 
@@ -420,21 +534,21 @@ main {
 .inference-gallery {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    margin-top: 1.5rem;
+    gap: 1.5rem;
+    margin-top: 1.25rem;
 }
 
 .inference-item {
-    background-color: rgba(15, 23, 42, 0.4);
+    background-color: var(--muted);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 12px;
     overflow: hidden;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .inference-item:hover {
     border-color: var(--accent);
-    transform: translateY(-4px);
+    transform: translateY(-3px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
 }
 
@@ -442,7 +556,7 @@ main {
     width: 100%;
     height: auto;
     overflow: hidden;
-    background-color: #020617;
+    background-color: #050505;
     cursor: zoom-in;
     display: flex;
     justify-content: center;
@@ -465,13 +579,13 @@ main {
 .lightbox-modal {
     display: none;
     position: fixed;
-    z-index: 2000; /* Must be higher than header and everything else */
+    z-index: 2000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background-color: rgba(9, 15, 29, 0.9);
+    background-color: rgba(10, 10, 10, 0.92);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     align-items: center;
@@ -497,16 +611,16 @@ main {
     text-align: center;
     color: var(--text-primary);
     padding: 1.5rem 0;
-    font-size: 1.05rem;
+    font-size: 1rem;
     line-height: 1.6;
 }
 
 .lightbox-caption code {
-    background-color: rgba(30, 41, 59, 0.8);
+    background-color: var(--muted);
     padding: 0.15rem 0.4rem;
     border-radius: 4px;
     color: var(--accent);
-    font-family: monospace;
+    font-family: 'JetBrains Mono', monospace;
 }
 
 .lightbox-close {
@@ -524,7 +638,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(30, 41, 59, 0.5);
+    background: var(--muted);
     border: 1px solid var(--border);
     border-radius: 50%;
 }
@@ -532,7 +646,7 @@ main {
 .lightbox-close:hover {
     color: var(--text-primary);
     transform: rotate(90deg);
-    background: rgba(30, 41, 59, 0.8);
+    background: rgba(38, 38, 38, 0.8);
     border-color: var(--accent);
 }
 
@@ -547,23 +661,25 @@ main {
 }
 
 .inference-caption {
-    padding: 1rem;
-    font-size: 0.85rem;
+    padding: 0.85rem 1rem;
+    font-size: 0.82rem;
     color: var(--text-secondary);
     line-height: 1.5;
     border-top: 1px solid var(--border);
 }
 
 .inference-caption code {
-    background-color: rgba(30, 41, 59, 0.8);
+    background-color: var(--muted);
     padding: 0.15rem 0.4rem;
     border-radius: 4px;
     color: var(--accent);
-    font-family: monospace;
-    font-size: 0.8rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
 }
 
-/* Interactive Diagrams */
+/* ========================================
+   Interactive Diagrams
+   ======================================== */
 .project-diagrams-side {
     display: flex;
     flex-direction: column;
@@ -572,7 +688,7 @@ main {
 .diagram-tabs {
     display: flex;
     gap: 0.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
     border-bottom: 1px solid var(--border);
     padding-bottom: 0.5rem;
 }
@@ -581,30 +697,30 @@ main {
     background: none;
     border: none;
     color: var(--text-secondary);
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
+    padding: 0.5rem 0.85rem;
+    font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;
     border-radius: 8px;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .tab-btn:hover {
     color: var(--text-primary);
-    background-color: rgba(30, 41, 59, 0.5);
+    background-color: var(--muted);
 }
 
 .tab-btn.active {
     color: var(--accent);
-    background-color: rgba(56, 189, 248, 0.08);
+    background-color: rgba(217, 145, 120, 0.08);
 }
 
 .diagram-viewport {
-    background-color: rgba(15, 23, 42, 0.5);
+    background-color: var(--muted);
     border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 2rem;
-    min-height: 520px;
+    border-radius: 16px;
+    padding: 1.75rem;
+    min-height: 500px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -634,24 +750,24 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.35rem;
 }
 
 /* Flowchart Nodes */
 .flow-node {
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%);
+    background: var(--card-bg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(56, 189, 248, 0.15);
-    border-radius: 14px;
-    padding: 1.1rem 1.4rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
     text-align: center;
     cursor: pointer;
-    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
     user-select: none;
     position: relative;
-    width: 280px;
+    width: 260px;
 }
 
 .flow-node::before {
@@ -660,18 +776,17 @@ main {
     top: 0;
     left: 0;
     width: 100%;
-    height: 3px;
+    height: 2px;
     background: linear-gradient(90deg, transparent, var(--accent), transparent);
     opacity: 0;
     transition: opacity 0.3s ease;
-    border-radius: 14px 14px 0 0;
+    border-radius: 12px 12px 0 0;
 }
 
 .flow-node:hover, .flow-node.active {
-    transform: translateY(-4px);
+    transform: translateY(-3px);
     border-color: var(--accent);
-    box-shadow: 0 10px 25px rgba(56, 189, 248, 0.2);
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.65) 0%, rgba(15, 23, 42, 0.8) 100%);
+    box-shadow: 0 8px 20px rgba(217, 145, 120, 0.15);
 }
 
 .flow-node:hover::before, .flow-node.active::before {
@@ -680,50 +795,50 @@ main {
 
 /* Specific Node Type Variations */
 .input-node {
-    border-color: rgba(139, 92, 246, 0.25);
+    border-color: rgba(217, 145, 120, 0.3);
 }
 .input-node::before {
-    background: linear-gradient(90deg, transparent, #a78bfa, transparent);
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
 }
 .input-node:hover, .input-node.active {
-    border-color: #a78bfa;
-    box-shadow: 0 10px 25px rgba(139, 92, 246, 0.2);
+    border-color: var(--accent);
+    box-shadow: 0 8px 20px rgba(217, 145, 120, 0.2);
 }
 
 .condition-node {
-    border-color: rgba(245, 158, 11, 0.25);
-    border-radius: 16px;
+    border-color: rgba(245, 158, 11, 0.3);
+    border-radius: 14px;
 }
 .condition-node::before {
-    background: linear-gradient(90deg, transparent, #f59e0b, transparent);
+    background: linear-gradient(90deg, transparent, var(--accent-secondary), transparent);
 }
 .condition-node:hover, .condition-node.active {
-    border-color: #f59e0b;
-    box-shadow: 0 10px 25px rgba(245, 158, 11, 0.2);
+    border-color: var(--accent-secondary);
+    box-shadow: 0 8px 20px rgba(245, 158, 11, 0.15);
 }
 
 .output-node {
-    border-color: rgba(16, 185, 129, 0.25);
+    border-color: rgba(16, 185, 129, 0.3);
 }
 .output-node::before {
     background: linear-gradient(90deg, transparent, #10b981, transparent);
 }
 .output-node:hover, .output-node.active {
     border-color: #10b981;
-    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.15);
 }
 
 .node-title {
-    font-size: 0.92rem;
+    font-size: 0.88rem;
     font-weight: 600;
     color: var(--text-primary);
     letter-spacing: 0.01em;
 }
 
 .node-desc {
-    font-size: 0.76rem;
+    font-size: 0.72rem;
     color: var(--text-secondary);
-    margin-top: 0.35rem;
+    margin-top: 0.3rem;
     line-height: 1.4;
     white-space: nowrap;
     overflow: hidden;
@@ -732,7 +847,7 @@ main {
 }
 
 .flow-node:hover .node-desc, .flow-node.active .node-desc {
-    color: rgba(248, 250, 252, 0.95);
+    color: var(--text-primary);
 }
 
 /* Node Badges */
@@ -741,11 +856,11 @@ main {
     top: -9px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 0.62rem;
+    font-size: 0.6rem;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    padding: 0.15rem 0.6rem;
+    padding: 0.12rem 0.55rem;
     border-radius: 30px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     user-select: none;
@@ -753,18 +868,18 @@ main {
 }
 
 .input-badge {
-    background-color: #8b5cf6;
-    color: #ffffff;
+    background-color: var(--accent);
+    color: #0a0a0a;
 }
 
 .decision-badge {
-    background-color: #f59e0b;
-    color: #0f172a;
+    background-color: var(--accent-secondary);
+    color: #0a0a0a;
 }
 
 .output-badge {
     background-color: #10b981;
-    color: #0f172a;
+    color: #0a0a0a;
 }
 
 /* Flowchart Arrows */
@@ -773,9 +888,9 @@ main {
     color: transparent !important;
     display: block;
     width: 2px;
-    height: 32px;
-    background-color: rgba(51, 65, 85, 0.8);
-    margin: 0.2rem auto;
+    height: 28px;
+    background-color: rgba(96, 96, 104, 0.5);
+    margin: 0.15rem auto;
     position: relative;
     transition: all 0.3s ease;
 }
@@ -788,7 +903,7 @@ main {
     transform: translateX(-50%);
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 6px solid rgba(51, 65, 85, 0.8);
+    border-top: 6px solid rgba(96, 96, 104, 0.5);
     transition: all 0.3s ease;
 }
 
@@ -806,11 +921,11 @@ main {
 
 .input-node:hover + .flow-arrow,
 .input-node.active + .flow-arrow {
-    background-color: #a78bfa;
+    background-color: var(--accent);
 }
 .input-node:hover + .flow-arrow::after,
 .input-node.active + .flow-arrow::after {
-    border-top-color: #a78bfa;
+    border-top-color: var(--accent);
 }
 
 /* Branching Nodes */
@@ -828,7 +943,7 @@ main {
     align-items: center;
     justify-content: center;
     position: relative;
-    color: rgba(51, 65, 85, 0.8);
+    color: rgba(96, 96, 104, 0.5);
     transition: color 0.3s ease;
 }
 
@@ -845,7 +960,7 @@ main {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    gap: 2rem;
+    gap: 1.5rem;
     margin-top: 0.2rem;
 }
 
@@ -858,18 +973,18 @@ main {
 
 .branch-left .flow-node, .branch-right .flow-node {
     width: 100%;
-    max-width: 220px;
+    max-width: 210px;
 }
 
 .branch-label {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 700;
     color: var(--accent);
-    background-color: rgba(56, 189, 248, 0.06);
-    border: 1px solid rgba(56, 189, 248, 0.15);
-    padding: 0.2rem 0.6rem;
+    background-color: rgba(217, 145, 120, 0.06);
+    border: 1px solid rgba(217, 145, 120, 0.15);
+    padding: 0.15rem 0.55rem;
     border-radius: 6px;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.35rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
@@ -885,23 +1000,23 @@ main {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 .dual-input-row .flow-node {
-    width: calc(50% - 1rem);
+    width: calc(50% - 0.75rem);
 }
 
 .dual-arrow-row {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 .dual-arrow-row .flow-arrow {
     width: 2px;
-    margin: 0.2rem auto;
+    margin: 0.15rem auto;
 }
 
 .dual-arrow-row .empty-arrow {
@@ -916,9 +1031,9 @@ main {
     align-items: center;
     justify-content: center;
     position: relative;
-    color: rgba(51, 65, 85, 0.8);
+    color: rgba(96, 96, 104, 0.5);
     transition: color 0.3s ease;
-    margin: 0.2rem 0;
+    margin: 0.15rem 0;
 }
 
 .merge-connector-svg {
@@ -936,14 +1051,14 @@ main {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    background-color: rgba(30, 41, 59, 0.4);
-    border: 1px dashed rgba(56, 189, 248, 0.3);
+    gap: 0.45rem;
+    background-color: var(--card-bg);
+    border: 1px dashed rgba(217, 145, 120, 0.3);
     border-radius: 10px;
-    padding: 0.5rem 1rem;
-    margin-top: 0.8rem;
+    padding: 0.45rem 0.85rem;
+    margin-top: 0.7rem;
     color: var(--text-secondary);
-    font-size: 0.78rem;
+    font-size: 0.74rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -959,8 +1074,8 @@ main {
 .loopback-badge:hover, .loopback-badge.active {
     border-color: var(--accent);
     color: var(--accent);
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
-    background-color: rgba(56, 189, 248, 0.05);
+    box-shadow: 0 0 15px rgba(217, 145, 120, 0.1);
+    background-color: rgba(217, 145, 120, 0.04);
 }
 
 .loopback-badge:hover .loopback-icon, .loopback-badge.active .loopback-icon {
@@ -975,15 +1090,14 @@ main {
     color: var(--accent);
 }
 
-
 /* Info Panel */
 .diagram-info-panel {
-    margin-top: 1.5rem;
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%);
+    margin-top: 1.25rem;
+    background: var(--card-bg);
     border: 1px solid var(--border);
     border-left: 4px solid var(--accent);
-    border-radius: 16px;
-    padding: 1.2rem 1.5rem;
+    border-radius: 12px;
+    padding: 1.1rem 1.35rem;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
@@ -991,12 +1105,12 @@ main {
 .panel-header {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
-    margin-bottom: 0.5rem;
+    gap: 0.55rem;
+    margin-bottom: 0.45rem;
 }
 
 .info-icon {
-    background-color: rgba(56, 189, 248, 0.1);
+    background-color: rgba(217, 145, 120, 0.1);
     color: var(--accent);
     width: 20px;
     height: 20px;
@@ -1004,97 +1118,149 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: bold;
 }
 
 .diagram-info-panel h5 {
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--text-primary);
     margin: 0;
 }
 
 .diagram-info-panel p {
-    font-size: 0.9rem;
+    font-size: 0.87rem;
     color: var(--text-secondary);
     line-height: 1.5;
     margin: 0;
 }
 
+/* ========================================
+   Footer
+   ======================================== */
+.site-footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border);
+    padding: 3rem 2rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.site-footer a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.site-footer a:hover {
+    color: var(--accent-hover);
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
 @media (max-width: 768px) {
-    .project-card {
-        padding: 1.5rem;
+    .site-nav {
+        padding: 0 1rem;
     }
-    
+
+    .nav-links {
+        gap: 1rem;
+    }
+
+    .nav-links a {
+        font-size: 0.8rem;
+    }
+
+    header.hero {
+        padding: 5rem 1.5rem 3rem;
+        min-height: auto;
+    }
+
+    .hero-text h1 {
+        font-size: 2.2rem;
+        letter-spacing: -1px;
+    }
+
+    .hero-text .subtitle {
+        font-size: 0.95rem;
+    }
+
+    .project-card {
+        padding: 1.25rem;
+    }
+
     .diagram-viewport {
         padding: 1rem;
         min-height: auto;
     }
-    
+
     .flow-node {
         width: 100%;
-        max-width: 280px;
-        padding: 0.9rem 1.1rem;
+        max-width: 260px;
+        padding: 0.85rem 1rem;
     }
-    
+
     .branch-lines {
         flex-direction: column;
         align-items: center;
-        gap: 1.2rem;
+        gap: 1rem;
     }
-    
+
     .branch-left, .branch-right {
         width: 100%;
     }
-    
+
     .branch-left .flow-node, .branch-right .flow-node {
-        max-width: 280px;
+        max-width: 260px;
     }
-    
+
     .dual-input-row {
         flex-direction: column;
         align-items: center;
-        gap: 1.2rem;
+        gap: 1rem;
     }
-    
+
     .dual-input-row .flow-node {
         width: 100%;
-        max-width: 280px;
+        max-width: 260px;
     }
-    
+
     .dual-arrow-row {
         display: none;
     }
-    
+
     .branch-connector, .merge-connector-2, .merge-connector-4 {
         height: 24px;
-        margin: 0.4rem 0;
+        margin: 0.35rem 0;
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
         position: relative;
     }
-    
+
     .branch-connector-svg, .merge-connector-svg {
         display: none !important;
     }
-    
+
     .branch-connector::after, .merge-connector-2::after, .merge-connector-4::after {
         content: '';
         display: block;
         width: 2px;
         height: 20px;
-        background-color: rgba(51, 65, 85, 0.8);
+        background-color: rgba(96, 96, 104, 0.5);
         position: relative;
     }
-    
+
     .branch-connector::before, .merge-connector-2::before, .merge-connector-4::before {
         content: '';
         border-left: 5px solid transparent;
         border-right: 5px solid transparent;
-        border-top: 6px solid rgba(51, 65, 85, 0.8);
+        border-top: 6px solid rgba(96, 96, 104, 0.5);
         position: absolute;
         bottom: 2px;
     }
@@ -1104,13 +1270,13 @@ main {
 .vk-parallel-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 0.5rem;
+    gap: 0.4rem;
     width: 100%;
 }
 
 @media (max-width: 768px) {
     .vk-parallel-grid {
         grid-template-columns: 1fr !important;
-        gap: 0.8rem !important;
+        gap: 0.7rem !important;
     }
 }
