@@ -87,14 +87,20 @@ export function ProjectsSection() {
 
   return (
     <section className="projects-section" id="projects">
-      <h2 className="section-title">Проекты</h2>
+      <h2 className="section-title">ls projects/</h2>
 
       <div className="projects-container" ref={containerRef}>
         {/* Project 1: colreg-vision-node */}
         <div className="project-card">
+          <div className="terminal-bar">
+            <span className="terminal-dot red"></span>
+            <span className="terminal-dot yellow"></span>
+            <span className="terminal-dot green"></span>
+            <span className="terminal-bar-text">colreg-vision-node — bash</span>
+          </div>
           <div className="project-header">
             <div className="project-title-area">
-              <h3>COLREG Vision Node</h3>
+              <h3>colreg-vision-node</h3>
             </div>
           </div>
 
@@ -106,15 +112,6 @@ export function ProjectsSection() {
               <p>
                 Особое внимание уделено надёжности: при ухудшении видимости (туман, ночь, осадки) система переключается на мультимодальный режим с использованием ИК-камеры, совмещая тепловизионные рамки с цветным оптическим каналом.
               </p>
-            </div>
-
-            <div className="tech-stack-tags">
-              <span className="tech-tag">PyTorch</span>
-              <span className="tech-tag">YOLOv8</span>
-              <span className="tech-tag">EfficientNet</span>
-              <span className="tech-tag">OpenCV</span>
-              <span className="tech-tag">NumPy</span>
-              <span className="tech-tag">Pillow</span>
             </div>
 
             <div className="inference-gallery inference-gallery-grid">
@@ -132,9 +129,15 @@ export function ProjectsSection() {
 
         {/* Project 2: Cellsistant */}
         <div className="project-card">
+          <div className="terminal-bar">
+            <span className="terminal-dot red"></span>
+            <span className="terminal-dot yellow"></span>
+            <span className="terminal-dot green"></span>
+            <span className="terminal-bar-text">cellsistant — bash</span>
+          </div>
           <div className="project-header">
             <div className="project-title-area">
-              <h3>Cellsistant</h3>
+              <h3>cellsistant</h3>
             </div>
           </div>
 
@@ -146,17 +149,6 @@ export function ProjectsSection() {
               <p>
                 Ассистент может самостоятельно создавать, редактировать и запускать ячейки ноутбука, анализировать графики с помощью зрения (Vision), а также выполнять терминальные команды в безопасной песочнице с 4 уровнями доступа и блокировкой деструктивных команд. Поддерживает два режима: Agent (полный доступ) и Ask (только чтение).
               </p>
-            </div>
-
-            <div className="tech-stack-tags">
-              <span className="tech-tag">Python</span>
-              <span className="tech-tag">JupyterLab Ext</span>
-              <span className="tech-tag">TypeScript</span>
-              <span className="tech-tag">LLM Agents</span>
-              <span className="tech-tag">ReAct Loop</span>
-              <span className="tech-tag">OpenRouter</span>
-              <span className="tech-tag">Vision</span>
-              <span className="tech-tag">Rate Limiting</span>
             </div>
 
             <div className="inference-gallery">
@@ -171,9 +163,15 @@ export function ProjectsSection() {
 
         {/* Project 3: VK Workspace Intelligent Search */}
         <div className="project-card">
+          <div className="terminal-bar">
+            <span className="terminal-dot red"></span>
+            <span className="terminal-dot yellow"></span>
+            <span className="terminal-dot green"></span>
+            <span className="terminal-bar-text">vk-workspace-search — bash</span>
+          </div>
           <div className="project-header">
             <div className="project-title-area">
-              <h3>VK Workspace Intelligent Search</h3>
+              <h3>vk-workspace-search</h3>
             </div>
           </div>
 
@@ -185,17 +183,6 @@ export function ProjectsSection() {
               <p>
                 В основе поиска лежит ансамбль <strong>Alpha-Blending</strong> (4 параллельных потока: dense, HyDE, sparse main/opt), объединяемый по схеме <strong>RRF Fusion</strong> в Qdrant. Финальное ранжирование выполняется кросс-энкодером Llama-Nemotron-Reranker-1B с эвристическим бустингом. Результат: <strong>Recall@50 = 0.62</strong>, <strong>nDCG@50 = 0.52</strong>, улучшение на <strong>30%</strong> относительно бейзлайна.
               </p>
-            </div>
-
-            <div className="tech-stack-tags">
-              <span className="tech-tag">FastAPI</span>
-              <span className="tech-tag">Qdrant</span>
-              <span className="tech-tag">Qwen3-Embedding</span>
-              <span className="tech-tag">FastEmbed BM25</span>
-              <span className="tech-tag">HyDE</span>
-              <span className="tech-tag">RRF Fusion</span>
-              <span className="tech-tag">Llama-Nemotron</span>
-              <span className="tech-tag">Docker</span>
             </div>
           </div>
         </div>

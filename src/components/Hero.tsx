@@ -1,42 +1,58 @@
 import { useState, useEffect } from 'react'
 
-const subtitleText = 'ML Engineer & Full-Stack Developer'
+const consoleLines = [
+  { type: 'comment', text: '# Привет! Я Егор — ML инженер и разработчик' },
+  { type: 'command', text: '$ cat about.txt' },
+  { type: 'output', text: 'В программирование я пришёл в 2019 году — начинал с JavaScript' },
+  { type: 'output', text: 'и написания ботов для Discord. Со временем интерес сместился' },
+  { type: 'output', text: 'от скриптов к более глубоким задачам.' },
+  { type: 'empty', text: '' },
+  { type: 'command', text: '$ cat interests.txt' },
+  { type: 'output', text: 'Мне нравится решать интересные задачи, применяя нейросети' },
+  { type: 'output', text: 'в пайплайнах, — работать с большими моделями и находить' },
+  { type: 'output', text: 'способы встроить их в реальные продукты.' },
+]
 
 export function Hero() {
-  const [displayed, setDisplayed] = useState('')
-  const [typingDone, setTypingDone] = useState(false)
+  const [visibleLines, setVisibleLines] = useState(0)
 
   useEffect(() => {
     let i = 0
     const interval = setInterval(() => {
-      if (i < subtitleText.length) {
-        setDisplayed(subtitleText.slice(0, i + 1))
+      if (i < consoleLines.length) {
+        setVisibleLines(prev => prev + 1)
         i++
       } else {
         clearInterval(interval)
-        setTypingDone(true)
       }
-    }, 60)
+    }, 150)
     return () => clearInterval(interval)
   }, [])
 
   return (
     <section className="hero-section" id="about">
       <div className="hero-content">
-        <div className="hero-text">
-          <h1>Привет, я Егор</h1>
-          <p className="subtitle">
-            {displayed}
-            {!typingDone && <span className="subtitle-cursor" />}
-          </p>
-
-          <div className="bio">
-            <p>В программирование я пришёл в 2019 году — начинал с JavaScript и написания ботов для Discord. Со временем интерес сместился от скриптов к более глубоким задачам.</p>
-            <p>Мне нравится решать интересные задачи, применяя нейросети в пайплайнах, — работать с большими моделями и находить способы встроить их в реальные продукты.</p>
-          </div>
+        <div className="terminal-bar">
+          <span className="terminal-dot red"></span>
+          <span className="terminal-dot yellow"></span>
+          <span className="terminal-dot green"></span>
+          <span className="terminal-bar-text">yegor@portfolio:~</span>
         </div>
-        <div className="avatar-container">
-          <img src="/assets/avatar.jpg" alt="Егор" className="avatar" loading="eager" />
+        <div className="hero-body">
+          <div className="hero-text">
+            <h1>whoami</h1>
+
+            <div className="bio">
+              {consoleLines.slice(0, visibleLines).map((line, i) => (
+                <p key={i} className={`console-line console-${line.type}`}>
+                  {line.text}
+                </p>
+              ))}
+            </div>
+          </div>
+          <div className="avatar-container">
+            <img src="/assets/avatar.jpg" alt="Егор" className="avatar" loading="eager" />
+          </div>
         </div>
       </div>
     </section>
