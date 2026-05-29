@@ -1,9 +1,53 @@
+import { useRef, useState, useEffect, useCallback } from 'react'
 import { ColregDiagram } from './ColregDiagram'
 import { CellsistantDiagram } from './CellsistantDiagram'
 import { VkDiagram } from './VkDiagram'
 import { ImageWithLightbox } from './ImageWithLightbox'
 
+const PROJECT_COUNT = 3
+
 export function ProjectsSection() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  const scrollToProject = useCallback((index: number) => {
+    const container = containerRef.current
+    if (!container) return
+    const cards = container.querySelectorAll('.project-card')
+    const card = cards[index] as HTMLElement | undefined
+    if (card) {
+      const containerRect = container.getBoundingClientRect()
+      const cardRect = card.getBoundingClientRect()
+      const scrollLeft = card.offsetLeft - (containerRect.width / 2) + (cardRect.width / 2)
+      container.scrollTo({ left: scrollLeft, behavior: 'smooth' })
+    }
+  }, [])
+
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container) return
+
+    const handleScroll = () => {
+      const cards = container.querySelectorAll('.project-card')
+      const containerCenter = container.scrollLeft + container.clientWidth / 2
+
+      let closest = 0
+      let minDist = Infinity
+      cards.forEach((card, i) => {
+        const cardCenter = (card as HTMLElement).offsetLeft + (card as HTMLElement).offsetWidth / 2
+        const dist = Math.abs(containerCenter - cardCenter)
+        if (dist < minDist) {
+          minDist = dist
+          closest = i
+        }
+      })
+      setActiveIndex(closest)
+    }
+
+    container.addEventListener('scroll', handleScroll, { passive: true })
+    return () => container.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <section className="projects-section" id="projects">
       <div className="section-header">
@@ -11,7 +55,7 @@ export function ProjectsSection() {
         <p className="section-subtitle">Практические разработки в области машинного обучения и компьютерного зрения</p>
       </div>
 
-      <div className="projects-container">
+      <div className="projects-container" ref={containerRef}>
         {/* Project 1: colreg-vision-node */}
         <div className="project-card">
           <div className="project-header">
@@ -138,6 +182,17 @@ export function ProjectsSection() {
             <VkDiagram />
           </div>
         </div>
+      </div>
+
+      <div className="project-nav">
+        {Array.from({ length: PROJECT_COUNT }).map((_, i) => (
+          <button
+            key={i}
+            className={`project-dot ${activeIndex === i ? 'active' : ''}`}
+            onClick={() => scrollToProject(i)}
+            aria-label={`Перейти к проекту ${i + 1}`}
+          />
+        ))}
       </div>
     </section>
   )

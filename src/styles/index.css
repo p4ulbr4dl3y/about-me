@@ -22,6 +22,11 @@
     font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial, Helvetica, sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 70px;
+}
+
 body {
     background-color: var(--bg-color);
     color: var(--text-primary);
@@ -45,6 +50,28 @@ body::before {
 }
 
 /* ========================================
+   Selection Style
+   ======================================== */
+::selection {
+    background-color: rgba(217, 145, 120, 0.3);
+    color: var(--text-primary);
+}
+
+/* ========================================
+   Scroll Progress Bar
+   ======================================== */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+    z-index: 101;
+    transition: width 0.1s linear;
+    pointer-events: none;
+}
+
+/* ========================================
    Navigation
    ======================================== */
 .site-nav {
@@ -53,15 +80,22 @@ body::before {
     left: 0;
     right: 0;
     z-index: 100;
-    background: rgba(10, 10, 10, 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
+    background: rgba(10, 10, 10, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid transparent;
     padding: 0 2rem;
     height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.site-nav.scrolled {
+    background: rgba(10, 10, 10, 0.92);
+    border-bottom-color: var(--border);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
 
 .nav-logo {
@@ -71,6 +105,11 @@ body::before {
     color: var(--text-primary);
     text-decoration: none;
     letter-spacing: -0.5px;
+    transition: opacity 0.2s ease;
+}
+
+.nav-logo:hover {
+    opacity: 0.8;
 }
 
 .nav-logo span {
@@ -89,10 +128,102 @@ body::before {
     font-size: 0.9rem;
     font-weight: 500;
     transition: color 0.2s ease;
+    position: relative;
+    padding: 4px 0;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent);
+    border-radius: 1px;
+    transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-links a:hover {
     color: var(--text-primary);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.nav-links a.active {
+    color: var(--accent);
+}
+
+/* Mobile Nav Toggle */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 110;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: var(--text-primary);
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+}
+
+.nav-toggle.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.nav-toggle.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 640px) {
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 280px;
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        gap: 2.5rem;
+        padding: 2rem;
+        transform: translateX(100%);
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        border-left: 1px solid var(--border);
+        z-index: 105;
+    }
+
+    .nav-links.open {
+        transform: translateX(0);
+    }
+
+    .nav-links a {
+        font-size: 1.15rem;
+    }
 }
 
 /* ========================================
@@ -107,6 +238,24 @@ header.hero {
     padding: 8rem 2rem 4rem;
     border-bottom: 1px solid var(--border);
     z-index: 1;
+    overflow: hidden;
+}
+
+header.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(217, 145, 120, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+    animation: heroGlow 8s ease-in-out infinite alternate;
+}
+
+@keyframes heroGlow {
+    from { transform: translate(0, 0) scale(1); opacity: 0.5; }
+    to { transform: translate(-30px, 30px) scale(1.1); opacity: 1; }
 }
 
 .hero::after {
@@ -197,6 +346,21 @@ header.hero {
     letter-spacing: -0.3px;
 }
 
+.subtitle-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    background-color: var(--accent);
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    animation: cursorBlink 1s step-end infinite;
+}
+
+@keyframes cursorBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
 .location-age {
     display: flex;
     gap: 0.75rem;
@@ -249,6 +413,21 @@ main {
     max-width: 1280px;
     margin: 0 auto;
     padding: 0;
+}
+
+/* ========================================
+   Section Reveal Animation
+   ======================================== */
+.reveal-section {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-section.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* ========================================
@@ -370,10 +549,43 @@ main {
     padding: 2rem calc(50vw - 550px);
     scrollbar-width: none;
     -ms-overflow-style: none;
+    scroll-behavior: smooth;
 }
 
 .projects-container::-webkit-scrollbar {
     display: none;
+}
+
+/* Project Navigation Dots */
+.project-nav {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 2rem;
+    padding: 0 2rem;
+}
+
+.project-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--muted);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.project-dot:hover {
+    background-color: var(--text-secondary);
+    transform: scale(1.2);
+}
+
+.project-dot.active {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    transform: scale(1.3);
+    box-shadow: 0 0 12px rgba(217, 145, 120, 0.4);
 }
 
 .section-header {
@@ -406,7 +618,7 @@ main {
     border-radius: 16px;
     padding: 2.5rem;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 @media (max-width: 1150px) {
@@ -422,6 +634,7 @@ main {
 
 .project-card:hover {
     border-color: rgba(217, 145, 120, 0.3);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
 }
 
 .project-header {
@@ -691,6 +904,7 @@ main {
     margin-bottom: 1.25rem;
     border-bottom: 1px solid var(--border);
     padding-bottom: 0.5rem;
+    flex-wrap: wrap;
 }
 
 .tab-btn {
@@ -703,6 +917,7 @@ main {
     cursor: pointer;
     border-radius: 8px;
     transition: all 0.2s ease;
+    position: relative;
 }
 
 .tab-btn:hover {
@@ -713,6 +928,23 @@ main {
 .tab-btn.active {
     color: var(--accent);
     background-color: rgba(217, 145, 120, 0.08);
+}
+
+.tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: var(--accent);
+    border-radius: 1px;
+    transition: width 0.2s ease;
+}
+
+.tab-btn.active::after {
+    width: 60%;
 }
 
 .diagram-viewport {
@@ -1137,6 +1369,50 @@ main {
 }
 
 /* ========================================
+   Scroll to Top Button
+   ======================================== */
+.scroll-top-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 90;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.scroll-top-btn.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.scroll-top-btn:hover {
+    background: var(--accent);
+    color: #0a0a0a;
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(217, 145, 120, 0.3);
+}
+
+.scroll-top-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* ========================================
    Footer
    ======================================== */
 .site-footer {
@@ -1165,14 +1441,6 @@ main {
 @media (max-width: 768px) {
     .site-nav {
         padding: 0 1rem;
-    }
-
-    .nav-links {
-        gap: 1rem;
-    }
-
-    .nav-links a {
-        font-size: 0.8rem;
     }
 
     header.hero {
@@ -1263,6 +1531,13 @@ main {
         border-top: 6px solid rgba(96, 96, 104, 0.5);
         position: absolute;
         bottom: 2px;
+    }
+
+    .scroll-top-btn {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        width: 40px;
+        height: 40px;
     }
 }
 

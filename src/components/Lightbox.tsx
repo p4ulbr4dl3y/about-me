@@ -20,7 +20,9 @@ export function Lightbox() {
     <div className="lightbox-modal" style={{ display: 'flex' }} onClick={(e) => {
       if (e.target === e.currentTarget) closeLightbox()
     }}>
-      <span className="lightbox-close" onClick={closeLightbox}>&times;</span>
+      <span className="lightbox-close" onClick={closeLightbox} role="button" tabIndex={0} aria-label="Close">
+        &times;
+      </span>
       <img className="lightbox-content" src={src} alt={alt} />
       <div className="lightbox-caption">{caption}</div>
     </div>
