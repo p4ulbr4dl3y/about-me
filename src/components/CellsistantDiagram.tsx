@@ -6,7 +6,7 @@ import { LoopbackBadge } from './LoopbackBadge'
 
 export function CellsistantDiagram() {
   return (
-    <DiagramContainer defaultText="Наведите курсор на элементы схемы, чтобы увидеть подробное описание каждого этапа работы ИИ-агента в цикле ReAct.">
+    <DiagramContainer>
       <div className="diagram-tabs">
         <button className="tab-btn active">Схема: Цикл ИИ-агента (Agent Loop)</button>
       </div>

@@ -3,12 +3,11 @@ import { DiagramProvider } from './DiagramContext'
 
 interface DiagramContainerProps {
   children: ReactNode
-  defaultText?: string
 }
 
-export function DiagramContainer({ children, defaultText }: DiagramContainerProps) {
+export function DiagramContainer({ children }: DiagramContainerProps) {
   return (
-    <DiagramProvider defaultText={defaultText}>
+    <DiagramProvider>
       <div className="project-diagrams-side">
         {children}
       </div>

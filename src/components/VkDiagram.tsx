@@ -74,7 +74,7 @@ function SearchingPipeline() {
 
 export function VkDiagram() {
   return (
-    <DiagramContainer defaultText="Наведите курсор на элементы схемы, чтобы увидеть подробное описание каждого этапа индексации и поиска сообщений.">
+    <DiagramContainer>
       <TabDiagram
         tabs={[
           { id: 'vk-indexing-pipeline', label: 'Схема 1: Индексация данных', content: <IndexingPipeline /> },
