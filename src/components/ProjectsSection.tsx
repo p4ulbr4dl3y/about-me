@@ -51,17 +51,13 @@ export function ProjectsSection() {
 
   return (
     <section className="projects-section" id="projects">
-      <div className="section-header">
-        <h2 className="section-title">Проекты</h2>
-        <p className="section-subtitle">Практические разработки в области машинного обучения и компьютерного зрения</p>
-      </div>
+      <h2 className="section-title">Проекты</h2>
 
       <div className="projects-container" ref={containerRef}>
         {/* Project 1: colreg-vision-node */}
         <div className="project-card">
           <div className="project-header">
             <div className="project-title-area">
-              <span className="project-tag">Computer Vision</span>
               <h3>colreg-vision-node</h3>
               <p className="project-desc-short">
                 Нода компьютерного зрения для автоматического определения навигационного статуса судов по МППСС-72 (COLREG) с использованием детекции знаков/огней и слияния данных сенсоров.
@@ -72,7 +68,6 @@ export function ProjectsSection() {
           <ProjectTabs
             info={
               <div className="project-info-side">
-                <h4>Описание проекта</h4>
                 <div className="project-full-desc">
                   <p>
                     Система разработана для повышения безопасности автономного и ассистируемого судоходства. Она автоматически распознаёт навигационный статус встречных судов в соответствии с МППСС-72. Алгоритм анализирует дневные сигнальные фигуры (шары, цилиндры, ромбы, конусы) или ночные огни (топовые, бортовые, кормовые, круговые).
@@ -90,17 +85,14 @@ export function ProjectsSection() {
                   <span className="tech-tag">OpenCV</span>
                 </div>
 
-                <h4 style={{ marginTop: '2.5rem', marginBottom: '1rem' }}>Результаты работы (Инференс)</h4>
-                <div className="inference-gallery">
+                <div className="inference-gallery inference-gallery-grid">
                   <ImageWithLightbox
                     src="/assets/colreg/original_result_no_expansion.jpg"
                     alt="Детекция в ИК спектре"
-                    caption={<>ИК-канал (Ночь/Туман): Детекция судна как <code>MECH #1 (100%)</code> (судно с механическим двигателем на ходу).</>}
                   />
                   <ImageWithLightbox
                     src="/assets/colreg/photo_result_nuc_at_2.5.jpg"
                     alt="Детекция в RGB спектре"
-                    caption={<>RGB-канал (День): Определение класса <code>NUC #1 (90%)</code> (Not Under Command). Модель распознала два чёрных шара на мачте.</>}
                   />
                 </div>
               </div>
@@ -113,7 +105,6 @@ export function ProjectsSection() {
         <div className="project-card">
           <div className="project-header">
             <div className="project-title-area">
-              <span className="project-tag">AI Agent &amp; Tool Use</span>
               <h3>Cellsistant</h3>
               <p className="project-desc-short">
                 Интеллектуальный ИИ-ассистент, встроенный непосредственно в интерфейс JupyterLab, для автоматизации написания кода, анализа данных, визуализации и работы с файловой системой.
@@ -124,7 +115,6 @@ export function ProjectsSection() {
           <ProjectTabs
             info={
               <div className="project-info-side">
-                <h4>Описание проекта</h4>
                 <div className="project-full-desc">
                   <p>
                     Cellsistant превращает среду JupyterLab в интерактивную площадку под управлением ИИ-агента. Вместо простого генератора кода, расширение реализует полноценный цикл планирования и вызова инструментов (Tool Use / ReAct Loop).
@@ -142,12 +132,10 @@ export function ProjectsSection() {
                   <span className="tech-tag">ReAct Loop</span>
                 </div>
 
-                <h4 style={{ marginTop: '2.5rem', marginBottom: '1rem' }}>Демонстрация работы</h4>
                 <div className="inference-gallery">
                   <ImageWithLightbox
                     src="/assets/cellsistant/demo.gif"
                     alt="Cellsistant Demo GIF"
-                    caption={<>Интерфейс Cellsistant в действии: Агент принимает запрос, пишет код в ячейках JupyterLab, автоматически запускает их и анализирует вывод.</>}
                     fullWidth
                   />
                 </div>
@@ -161,7 +149,6 @@ export function ProjectsSection() {
         <div className="project-card">
           <div className="project-header">
             <div className="project-title-area">
-              <span className="project-tag">Information Retrieval &amp; NLP</span>
               <h3>VK Workspace Intelligent Search</h3>
               <p className="project-desc-short">
                 Высокопроизводительная поисковая система для экосистемы VK Workspace, показавшая прирост Recall@50 и nDCG@50 на хакатоне за счёт двухстадийного ранжирования и гибридного поиска.
@@ -172,7 +159,6 @@ export function ProjectsSection() {
           <ProjectTabs
             info={
               <div className="project-info-side">
-                <h4>Описание проекта</h4>
                 <div className="project-full-desc">
                   <p>
                     Решение представляет собой интеллектуальный поисковый движок на базе FastAPI и Qdrant, предназначенный для мгновенного нахождения нужных чатов, сообщений и вложений. Индексация использует скользящее окно с перекрытием для чанков и обогащает сообщения «семантическими якорями» (авторство, цитирование, вложенные файлы).

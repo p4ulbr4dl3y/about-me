@@ -4,7 +4,7 @@ import { useLightbox } from './LightboxContext'
 interface ImageWithLightboxProps {
   src: string
   alt: string
-  caption: ReactNode
+  caption?: ReactNode
   fullWidth?: boolean
 }
 
@@ -14,7 +14,7 @@ export function ImageWithLightbox({ src, alt, caption, fullWidth }: ImageWithLig
 
   return (
     <div className="inference-item" style={fullWidth ? { gridColumn: 'span 2' } : undefined}>
-      <div className="image-wrapper" style={{ cursor: 'zoom-in', position: 'relative' }} onClick={() => openLightbox(src, alt, caption)}>
+      <div className="image-wrapper" style={{ cursor: 'zoom-in', position: 'relative' }} onClick={() => openLightbox(src, alt, caption ?? null)}>
         {!loaded && (
           <div style={{
             position: 'absolute',
@@ -36,7 +36,7 @@ export function ImageWithLightbox({ src, alt, caption, fullWidth }: ImageWithLig
           style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.3s ease' }}
         />
       </div>
-      <div className="inference-caption">{caption}</div>
+      {caption && <div className="inference-caption">{caption}</div>}
     </div>
   )
 }

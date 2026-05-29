@@ -620,6 +620,18 @@ main {
     margin-top: 1.25rem;
 }
 
+.inference-gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+@media (max-width: 640px) {
+    .inference-gallery-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .inference-item {
     background-color: var(--muted);
     border: 1px solid var(--border);
