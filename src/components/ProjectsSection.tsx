@@ -3,132 +3,6 @@ import { ImageWithLightbox } from './ImageWithLightbox'
 
 const PROJECT_COUNT = 3
 
-const colregPipelineSimple = `
-+---------------------+
-|    ИК-изображение   |
-+----------+----------+
-           |
-           v
-+---------------------+
-|  Детекция ИК YOLO   |
-+----------+----------+
-           |
-           v
-+---------------------+   +---------------------+
-| Видимое изображение |   |  Координаты рамок   |
-+----------+----------+   +----------+----------+
-           |                         |
-           +------------+------------+
-                        |
-                        v
-+-----------------------------------------------+
-|     Извлечение фрагментов по координатам      |
-+-----------------------+-----------------------+
-                        |
-                        v
-+-----------------------------------------------+
-|           Классификация огней YOLO            |
-+-----------------------+-----------------------+
-                        |
-                        v
-+-----------------------------------------------+
-|            Формирование результата            |
-+-----------------------------------------------+`
-
-const colregPipelineDetailed = `
-         +-----------------------------+
-         |     Входное изображение     |
-         +--------------+--------------+
-                        |
-                        v
-         +-----------------------------+
-         |     Детекция судов YOLO     |
-         +--------------+--------------+
-                        |
-                        v
-         +-----------------------------+
-         | Извлечение фрагментов судов |
-         +--------------+--------------+
-                        |
-                        v
-         +-----------------------------+
-         |    Бинарная классификация   |
-         |         EfficientNet        |
-         +--------------+--------------+
-                        |
-                        v
-         +-----------------------------+
-         |            Режим            |
-         +--------------+--------------+
-                        |
-           +------------+------------+
-           | Дневной                 | Ночной
-           v                         v
-+---------------------+   +---------------------+
-|Классификация дневных|   | Классификация огней |
-|     фигур YOLO      |   |        YOLO         |
-+----------+----------+   +----------+----------+
-           |                         |
-           +------------+------------+
-                        |
-                        v
-         +-----------------------------+
-         |     Применение иерархии     |
-         +--------------+--------------+
-                        |
-                        v
-         +-----------------------------+
-         |    Результат: типы судов    |
-         |         и уверенность       |
-         +-----------------------------+`
-
-const cellsistantReactLoop = `
-+-------------------------------------+
-|     Входной запрос пользователя     |
-+------------------+------------------+
-                   |
-                   v
-+-------------------------------------+
-|      Формирование контекста и       |
-|         системного промпта          |
-+------------------+------------------+
-                   |
-                   v
-+-----------------------------------------------------+
-|           Подача истории сообщений в LLM            |<--+
-+--------------------------+--------------------------+   |
-                           |                              |
-                           v                              |
-+-----------------------------------------------------+   |
-|              Модель выбрала инструмент?             |   |
-+--------------------------+--------------------------+   |
-                           |                              |
-          +----------------+----------------+             |
-          | Да                              | Нет         |
-          v                                 v             |
-+---------------------+   +------------------------------+ |
-| Парсинг параметров  |   | Формирование финального      | |
-|       функции       |   |            ответа            | |
-+----------+----------+   +--------------+---------------+ |
-          |                             |                 |
-          v                             v                 |
-+---------------------+   +------------------------------+ |
-|Выполнение инструмен-|   |      Завершение эпизода      | |
-|та во внешней среде  |   +------------------------------+ |
-+----------+----------+                                    |
-          |                                               |
-          v                                               |
-+---------------------+                                    |
-|Получение результата |                                    |
-|     Observation     |                                    |
-+----------+----------+                                    |
-          |                                               |
-          v                                               |
-+---------------------+                                    |
-|Добавление результата|                                    |
-|      в историю      |------------------------------------+
-+---------------------+`
-
 function smoothScrollTo(targetY: number, duration = 500) {
   const startY = window.scrollY
   const diff = targetY - startY
@@ -147,6 +21,33 @@ function smoothScrollTo(targetY: number, duration = 500) {
   }
 
   requestAnimationFrame(step)
+}
+
+function AsciiDiagram({ file, title }: { file: string; title: string }) {
+  const [content, setContent] = useState<string>('')
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch(`/assets/diagrams/${file}`)
+      .then(res => res.text())
+      .then(text => {
+        setContent(text)
+        setLoading(false)
+      })
+      .catch(() => {
+        setContent('Ошибка загрузки диаграммы')
+        setLoading(false)
+      })
+  }, [file])
+
+  return (
+    <div className="ascii-diagram">
+      <div className="ascii-diagram-header">
+        <span className="ascii-diagram-title">$ cat {title}</span>
+      </div>
+      <pre>{loading ? 'Загрузка...' : content}</pre>
+    </div>
+  )
 }
 
 export function ProjectsSection() {
@@ -240,19 +141,8 @@ export function ProjectsSection() {
               </p>
             </div>
 
-            <div className="ascii-diagram">
-              <div className="ascii-diagram-header">
-                <span className="ascii-diagram-title">$ cat pipeline_simple.txt</span>
-              </div>
-              <pre>{colregPipelineSimple}</pre>
-            </div>
-
-            <div className="ascii-diagram">
-              <div className="ascii-diagram-header">
-                <span className="ascii-diagram-title">$ cat pipeline_detailed.txt</span>
-              </div>
-              <pre>{colregPipelineDetailed}</pre>
-            </div>
+            <AsciiDiagram file="colreg-pipeline-simple.txt" title="pipeline_simple.txt" />
+            <AsciiDiagram file="colreg-pipeline-detailed.txt" title="pipeline_detailed.txt" />
 
             <div className="inference-gallery inference-gallery-grid">
               <ImageWithLightbox
@@ -291,12 +181,7 @@ export function ProjectsSection() {
               </p>
             </div>
 
-            <div className="ascii-diagram">
-              <div className="ascii-diagram-header">
-                <span className="ascii-diagram-title">$ cat react_loop.txt</span>
-              </div>
-              <pre>{cellsistantReactLoop}</pre>
-            </div>
+            <AsciiDiagram file="cellsistant-react-loop.txt" title="react_loop.txt" />
 
             <div className="inference-gallery">
               <ImageWithLightbox
