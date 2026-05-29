@@ -372,6 +372,7 @@ main {
     scrollbar-width: none;
     -ms-overflow-style: none;
     scroll-behavior: smooth;
+    align-items: flex-start;
 }
 
 .projects-container::-webkit-scrollbar {
@@ -460,9 +461,7 @@ main {
 }
 
 .project-header {
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 1.75rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .project-title-area h3 {
@@ -520,9 +519,7 @@ main {
 .project-tabs {
     display: flex;
     gap: 0.5rem;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 0;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .project-tab-btn {
