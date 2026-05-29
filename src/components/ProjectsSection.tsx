@@ -7,10 +7,31 @@ import { ProjectTabs } from './ProjectTabs'
 
 const PROJECT_COUNT = 3
 
+function smoothScrollTo(targetY: number, duration = 500) {
+  const startY = window.scrollY
+  const diff = targetY - startY
+  if (Math.abs(diff) < 2) return
+
+  let startTime: number | null = null
+
+  function step(time: number) {
+    if (!startTime) startTime = time
+    const elapsed = time - startTime
+    const progress = Math.min(elapsed / duration, 1)
+    // ease-out cubic
+    const ease = 1 - Math.pow(1 - progress, 3)
+    window.scrollTo(0, startY + diff * ease)
+    if (progress < 1) requestAnimationFrame(step)
+  }
+
+  requestAnimationFrame(step)
+}
+
 export function ProjectsSection() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const prevIndexRef = useRef(0)
+  const scrollTimerRef = useRef<number | null>(null)
 
   const scrollToProject = useCallback((index: number) => {
     const container = containerRef.current
@@ -48,21 +69,24 @@ export function ProjectsSection() {
         prevIndexRef.current = closest
         setActiveIndex(closest)
 
-        // Scroll page so the project card top is visible
-        const card = cards[closest] as HTMLElement
-        if (card) {
-          const cardTop = card.getBoundingClientRect().top + window.scrollY
-          const offset = 40 // some padding from top
-          window.scrollTo({
-            top: cardTop - offset,
-            behavior: 'smooth',
-          })
-        }
+        // Wait for horizontal scroll to settle before scrolling page
+        if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current)
+        scrollTimerRef.current = window.setTimeout(() => {
+          const card = cards[closest] as HTMLElement
+          if (card) {
+            const cardTop = card.getBoundingClientRect().top + window.scrollY
+            const offset = 40
+            smoothScrollTo(cardTop - offset, 600)
+          }
+        }, 300)
       }
     }
 
     container.addEventListener('scroll', handleScroll, { passive: true })
-    return () => container.removeEventListener('scroll', handleScroll)
+    return () => {
+      container.removeEventListener('scroll', handleScroll)
+      if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current)
+    }
   }, [])
 
   return (
