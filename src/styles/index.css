@@ -103,7 +103,6 @@ main {
    Hero / About Section
    ======================================== */
 .hero-section {
-    border-bottom: 1px solid var(--border);
     position: relative;
     overflow: hidden;
 }
@@ -278,7 +277,6 @@ main {
    Skills Section
    ======================================== */
 .skills-section {
-    border-bottom: 1px solid var(--border);
 }
 
 /* Marquee Styles */
