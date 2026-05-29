@@ -1,10 +1,11 @@
 import type { Skill } from '../data/skills'
 import { skillsRow1, skillsRow2, skillsRow3 } from '../data/skills'
+import { resolveAsset } from '../utils/resolveAsset'
 
 function SkillCard({ skill }: { skill: Skill }) {
   return (
     <div className="skill-card">
-      <img src={skill.icon} alt={skill.name} className={skill.invertDark ? 'invert-dark' : ''} />
+      <img src={resolveAsset(skill.icon)} alt={skill.name} className={skill.invertDark ? 'invert-dark' : ''} />
       <span>{skill.name}</span>
     </div>
   )

@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from 'react'
 import { useLightbox } from './LightboxContext'
+import { resolveAsset } from '../utils/resolveAsset'
 
 interface ImageWithLightboxProps {
   src: string
@@ -11,10 +12,11 @@ interface ImageWithLightboxProps {
 export function ImageWithLightbox({ src, alt, caption, fullWidth }: ImageWithLightboxProps) {
   const { openLightbox } = useLightbox()
   const [loaded, setLoaded] = useState(false)
+  const resolvedSrc = resolveAsset(src)
 
   return (
     <div className="inference-item" style={fullWidth ? { gridColumn: 'span 2' } : undefined}>
-      <div className="image-wrapper" style={{ cursor: 'zoom-in', position: 'relative' }} onClick={() => openLightbox(src, alt, caption ?? null)}>
+      <div className="image-wrapper" style={{ cursor: 'zoom-in', position: 'relative' }} onClick={() => openLightbox(resolvedSrc, alt, caption ?? null)}>
         {!loaded && (
           <div style={{
             position: 'absolute',
@@ -29,7 +31,7 @@ export function ImageWithLightbox({ src, alt, caption, fullWidth }: ImageWithLig
           </div>
         )}
         <img
-          src={src}
+          src={resolvedSrc}
           alt={alt}
           loading="lazy"
           onLoad={() => setLoaded(true)}

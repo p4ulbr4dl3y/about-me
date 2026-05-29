@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { resolveAsset } from '../utils/resolveAsset'
 
 interface AsciiDiagramProps {
   file: string
@@ -11,7 +12,7 @@ export function AsciiDiagram({ file, title }: AsciiDiagramProps) {
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
-    fetch(`/assets/diagrams/${file}`)
+    fetch(resolveAsset(`/assets/diagrams/${file}`))
       .then(res => res.text())
       .then(text => {
         setContent(text)

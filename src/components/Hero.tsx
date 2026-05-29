@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { resolveAsset } from '../utils/resolveAsset'
 
 const consoleLines = [
   { type: 'comment', text: '# Привет! Я Егор — ML инженер и разработчик' },
@@ -51,7 +52,7 @@ export function Hero() {
             </div>
           </div>
           <div className="avatar-container">
-            <img src="/assets/avatar.jpg" alt="Егор" className="avatar" loading="eager" />
+            <img src={resolveAsset('/assets/avatar.jpg')} alt="Егор" className="avatar" loading="eager" />
           </div>
         </div>
       </div>
