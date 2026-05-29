@@ -1,0 +1,58 @@
+export interface ProjectImage {
+  src: string
+  alt: string
+  fullWidth?: boolean
+}
+
+export interface ProjectDiagram {
+  file: string
+  title: string
+}
+
+export interface Project {
+  id: string
+  terminalTitle: string
+  title: string
+  description: string[]
+  /** Отдельный абзац с HTML-разметкой (опционально) */
+  descriptionHtml?: string
+  diagrams?: ProjectDiagram[]
+  images?: ProjectImage[]
+}
+
+export const projects: Project[] = [
+  {
+    id: 'colreg-vision-node',
+    terminalTitle: 'colreg-vision-node — bash',
+    title: 'colreg-vision-node',
+    description: [
+      'Конвейер видеоаналитики для автоматической классификации морских судов по МППСС-72. Система анализирует изображения с судовых камер, обнаруживает суда и определяет их эксплуатационный статус: парусное или моторное, занято ли ловом рыбы, имеет ли возможность управляться. Классификация выполняется на основе распознавания навигационных огней в ночном режиме и дневных сигналов — в дневном.',
+      'Архитектура построена по модульному принципу. Детекторы на базе YOLO обнаруживают суда на видимых и инфракрасных изображениях, EfficientNet выполняет бинарную классификацию на парусные и моторные, а специализированные модули распознают комбинации огней и фигур. Эти сигналы имеют приоритет над базовой классификацией и определяют итоговый статус судна.',
+      'В ночном режиме система использует данные двух камер: инфракрасная обеспечивает надежное обнаружение судов, а видимый спектр позволяет классифицировать навигационные огни. Интеграция выполняется через MQTT-узел, принимающий команды с изображением и публикующий результаты анализа. Основное применение — подключение к радарным системам типа Slew-to-Cue, где радар обнаруживает объект, автоматически наводит камеру, а система классифицирует судно и передает данные дальше.',
+    ],
+    diagrams: [
+      { file: 'full-pipeline.txt', title: 'full_pipeline.txt' },
+      { file: 'infrared-fusion.txt', title: 'infrared_fusion.txt' },
+    ],
+    images: [
+      { src: '/assets/colreg/original_result_no_expansion.jpg', alt: 'Детекция в ИК спектре' },
+      { src: '/assets/colreg/photo_result_nuc_at_2.5.jpg', alt: 'Детекция в RGB спектре' },
+    ],
+  },
+  {
+    id: 'recommender-system',
+    terminalTitle: 'recommender-system — bash',
+    title: 'recommender-system',
+    description: [
+      'Рекомендательная система для e-commerce, построенная по Lambda-архитектуре. Объединяет потоковую и пакетную обработку данных для формирования гибридных рекомендаций.',
+      'Архитектура состоит из трех слоев. Speed Layer обрабатывает события пользователей в реальном времени через Spark Structured Streaming, вычисляя популярные товары по категориям за скользящие 10-минутные окна и сохраняя результаты в Cassandra. Batch Layer выполняет тяжелые вычисления каждые 6 часов: обучает модель ALS для персонализированных рекомендаций, рассчитывает коллаборативную фильтрацию на основе меры Жаккара для поиска товаров, которые покупают вместе, и ежедневно запускает контентную фильтрацию через TF-IDF и LSH по названиям товаров. Serving Layer — это FastAPI-сервис, отдающий рекомендации через REST API с кэшированием в Redis.',
+      'Весь стек разворачивается через Docker Compose и включает Kafka, Zookeeper, HDFS, Spark-кластер, Cassandra, MariaDB, Redis, а также Prometheus и Grafana для мониторинга. Планировщик на базе APScheduler управляет запуском Spark-задач по расписанию.',
+    ],
+    diagrams: [
+      { file: 'recsys-speed-layer.txt', title: 'speed_layer.txt' },
+      { file: 'recsys-batch-bi.txt', title: 'batch_bi.txt' },
+      { file: 'recsys-batch-recsys.txt', title: 'batch_recsys.txt' },
+    ],
+  },
+
+]
