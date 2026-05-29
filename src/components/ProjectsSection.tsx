@@ -94,7 +94,7 @@ export function ProjectsSection() {
         <div className="project-card">
           <div className="project-header">
             <div className="project-title-area">
-              <h3>colreg-vision-node</h3>
+              <h3>COLREG Vision Node</h3>
             </div>
           </div>
 
@@ -114,6 +114,9 @@ export function ProjectsSection() {
               <span className="tech-tag">EfficientNet</span>
               <span className="tech-tag">Sensor Fusion</span>
               <span className="tech-tag">OpenCV</span>
+              <span className="tech-tag">MQTT</span>
+              <span className="tech-tag">BoT-SORT</span>
+              <span className="tech-tag">Polars</span>
             </div>
 
             <div className="inference-gallery inference-gallery-grid">
@@ -140,10 +143,10 @@ export function ProjectsSection() {
           <div className="project-info-side">
             <div className="project-full-desc">
               <p>
-                Cellsistant превращает среду JupyterLab в интерактивную площадку под управлением ИИ-агента. Вместо простого генератора кода, расширение реализует полноценный цикл планирования и вызова инструментов (Tool Use / ReAct Loop).
+                Cellsistant превращает среду JupyterLab в интерактивную площадку под управлением ИИ-агента. Расширение реализует полноценный цикл планирования и вызова инструментов (ReAct Loop) с 19 инструментами в 5 категориях: управление ноутбуками, файловая система, терминал, установка пакетов и поиск.
               </p>
               <p>
-                Ассистент может самостоятельно создавать, редактировать и запускать ячейки ноутбука, анализировать полученные ошибки и графики с помощью зрения (Vision), искать информацию по коду, а также выполнять терминальные команды в безопасной песочнице с блокировкой деструктивных действий.
+                Ассистент может самостоятельно создавать, редактировать и запускать ячейки ноутбука, анализировать графики с помощью зрения (Vision), а также выполнять терминальные команды в безопасной песочнице с 4 уровнями доступа и блокировкой деструктивных команд. Поддерживает два режима: Agent (полный доступ) и Ask (только чтение).
               </p>
             </div>
 
@@ -153,6 +156,9 @@ export function ProjectsSection() {
               <span className="tech-tag">TypeScript</span>
               <span className="tech-tag">LLM Agents</span>
               <span className="tech-tag">ReAct Loop</span>
+              <span className="tech-tag">OpenRouter</span>
+              <span className="tech-tag">Vision</span>
+              <span className="tech-tag">Rate Limiting</span>
             </div>
 
             <div className="inference-gallery">
@@ -176,11 +182,22 @@ export function ProjectsSection() {
           <div className="project-info-side">
             <div className="project-full-desc">
               <p>
-                Решение представляет собой интеллектуальный поисковый движок на базе FastAPI и Qdrant, предназначенный для мгновенного нахождения нужных чатов, сообщений и вложений. Индексация использует скользящее окно с перекрытием для чанков и обогащает сообщения «семантическими якорями» (авторство, цитирование, вложенные файлы).
+                Высокопроизводительный поисковый движок для экосистемы VK Workspace, разработанный на хакатоне Samsung IT Academy 2026. Индексация использует скользящее окно с перекрытием для чанков и обогащает сообщения «семантическими якорями» (авторство, цитирование, вложенные файлы).
               </p>
               <p>
-                В основе поиска лежит ансамбль <strong>Alpha-Blending</strong> (4 параллельных потока поиска: семантический dense, лексический sparse main/opt и расширение через HyDE), объединяемый по схеме <strong>RRF Fusion</strong> в Qdrant. Финальное ранжирование выполняется кросс-энкодером Llama-Nemotron-Reranker-1B, эвристическим бустингом и NDCG Sharpener.
+                В основе поиска лежит ансамбль <strong>Alpha-Blending</strong> (4 параллельных потока: dense, HyDE, sparse main/opt), объединяемый по схеме <strong>RRF Fusion</strong> в Qdrant. Финальное ранжирование выполняется кросс-энкодером Llama-Nemotron-Reranker-1B с эвристическим бустингом. Результат: <strong>Recall@50 = 0.62</strong>, <strong>nDCG@50 = 0.52</strong>, улучшение на <strong>30%</strong> относительно бейзлайна.
               </p>
+            </div>
+
+            <div className="tech-stack-tags">
+              <span className="tech-tag">FastAPI</span>
+              <span className="tech-tag">Qdrant</span>
+              <span className="tech-tag">Qwen3-Embedding</span>
+              <span className="tech-tag">FastEmbed BM25</span>
+              <span className="tech-tag">HyDE</span>
+              <span className="tech-tag">RRF Fusion</span>
+              <span className="tech-tag">Llama-Nemotron</span>
+              <span className="tech-tag">Docker</span>
             </div>
           </div>
         </div>
