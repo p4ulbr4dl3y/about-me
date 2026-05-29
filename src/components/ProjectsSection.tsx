@@ -10,6 +10,7 @@ const PROJECT_COUNT = 3
 export function ProjectsSection() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
+  const prevIndexRef = useRef(0)
 
   const scrollToProject = useCallback((index: number) => {
     const container = containerRef.current
@@ -42,7 +43,22 @@ export function ProjectsSection() {
           closest = i
         }
       })
-      setActiveIndex(closest)
+
+      if (closest !== prevIndexRef.current) {
+        prevIndexRef.current = closest
+        setActiveIndex(closest)
+
+        // Scroll page so the project card top is visible
+        const card = cards[closest] as HTMLElement
+        if (card) {
+          const cardTop = card.getBoundingClientRect().top + window.scrollY
+          const offset = 40 // some padding from top
+          window.scrollTo({
+            top: cardTop - offset,
+            behavior: 'smooth',
+          })
+        }
+      }
     }
 
     container.addEventListener('scroll', handleScroll, { passive: true })
