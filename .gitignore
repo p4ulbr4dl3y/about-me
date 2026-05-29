@@ -23,3 +23,8 @@ npm-debug.log*
 
 # TypeScript
 *.tsbuildinfo
+
+# Cloned projects (for analysis only)
+cellsistant-dev/
+colreg-vision-node/
+vktech-hackathon/
