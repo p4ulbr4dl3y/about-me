@@ -1,5 +1,5 @@
 /* ========================================
-   SkillsMP-Inspired Portfolio Theme
+   Portfolio Theme
    ======================================== */
 
 :root {
@@ -24,7 +24,6 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 70px;
 }
 
 body {
@@ -49,199 +48,67 @@ body::before {
     background-size: 32px 32px;
 }
 
-/* ========================================
-   Selection Style
-   ======================================== */
+/* Selection Style */
 ::selection {
     background-color: rgba(217, 145, 120, 0.3);
     color: var(--text-primary);
 }
 
 /* ========================================
-   Scroll Progress Bar
+   Main Content
    ======================================== */
-.scroll-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
-    z-index: 101;
-    transition: width 0.1s linear;
-    pointer-events: none;
-}
-
-/* ========================================
-   Navigation
-   ======================================== */
-.site-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    background: rgba(10, 10, 10, 0.6);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid transparent;
-    padding: 0 2rem;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.site-nav.scrolled {
-    background: rgba(10, 10, 10, 0.92);
-    border-bottom-color: var(--border);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-}
-
-.nav-logo {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    text-decoration: none;
-    letter-spacing: -0.5px;
-    transition: opacity 0.2s ease;
-}
-
-.nav-logo:hover {
-    opacity: 0.8;
-}
-
-.nav-logo span {
-    color: var(--accent);
-}
-
-.nav-links {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-}
-
-.nav-links a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: color 0.2s ease;
+main {
     position: relative;
-    padding: 4px 0;
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--accent);
-    border-radius: 1px;
-    transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.nav-links a:hover {
-    color: var(--text-primary);
-}
-
-.nav-links a:hover::after,
-.nav-links a.active::after {
-    width: 100%;
-}
-
-.nav-links a.active {
-    color: var(--accent);
-}
-
-/* Mobile Nav Toggle */
-.nav-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    z-index: 110;
-}
-
-.nav-toggle span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background-color: var(--text-primary);
-    border-radius: 2px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: center;
-}
-
-.nav-toggle.open span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-}
-
-.nav-toggle.open span:nth-child(2) {
-    opacity: 0;
-    transform: scaleX(0);
-}
-
-.nav-toggle.open span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-}
-
-@media (max-width: 640px) {
-    .nav-toggle {
-        display: flex;
-    }
-
-    .nav-links {
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 280px;
-        background: rgba(10, 10, 10, 0.98);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        flex-direction: column;
-        justify-content: center;
-        gap: 2.5rem;
-        padding: 2rem;
-        transform: translateX(100%);
-        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        border-left: 1px solid var(--border);
-        z-index: 105;
-    }
-
-    .nav-links.open {
-        transform: translateX(0);
-    }
-
-    .nav-links a {
-        font-size: 1.15rem;
-    }
-}
-
-/* ========================================
-   Hero Section
-   ======================================== */
-header.hero {
-    position: relative;
-    min-height: 70vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8rem 2rem 4rem;
-    border-bottom: 1px solid var(--border);
     z-index: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* ========================================
+   Section Reveal Animation
+   ======================================== */
+.reveal-section {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========================================
+   Shared Section Styles
+   ======================================== */
+.hero-section,
+.skills-section,
+.projects-section {
+    padding: 5rem 2rem 4rem;
+}
+
+.section-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: var(--text-primary);
+}
+
+/* ========================================
+   Hero / About Section
+   ======================================== */
+.hero-section {
+    border-bottom: 1px solid var(--border);
+    position: relative;
     overflow: hidden;
 }
 
-header.hero::before {
+.hero-section::before {
     content: '';
     position: absolute;
     top: -50%;
@@ -258,14 +125,6 @@ header.hero::before {
     to { transform: translate(-30px, 30px) scale(1.1); opacity: 1; }
 }
 
-.hero::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(10, 10, 10, 0) 0%, rgba(10, 10, 10, 0.4) 100%);
-    pointer-events: none;
-}
-
 .hero-content {
     display: flex;
     align-items: center;
@@ -273,8 +132,8 @@ header.hero::before {
     gap: 4rem;
     max-width: 1100px;
     width: 100%;
+    margin: 0 auto;
     position: relative;
-    z-index: 1;
 }
 
 @media (max-width: 768px) {
@@ -404,47 +263,22 @@ header.hero::before {
     margin-bottom: 0;
 }
 
-/* ========================================
-   Main Content
-   ======================================== */
-main {
-    position: relative;
-    z-index: 1;
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0;
-}
+@media (max-width: 768px) {
+    .hero-text h1 {
+        font-size: 2.2rem;
+        letter-spacing: -1px;
+    }
 
-/* ========================================
-   Section Reveal Animation
-   ======================================== */
-.reveal-section {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.reveal-section.visible {
-    opacity: 1;
-    transform: translateY(0);
+    .hero-text .subtitle {
+        font-size: 0.95rem;
+    }
 }
 
 /* ========================================
    Skills Section
    ======================================== */
 .skills-section {
-    padding: 5rem 0 4rem;
-}
-
-.skills-section h2 {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 2.2rem;
-    text-align: center;
-    margin-bottom: 3rem;
-    font-weight: 800;
-    letter-spacing: -1px;
-    color: var(--text-primary);
+    border-bottom: 1px solid var(--border);
 }
 
 /* Marquee Styles */
@@ -502,7 +336,7 @@ main {
     to { transform: translateX(0); }
 }
 
-/* Skill Card for Marquee */
+/* Skill Card */
 .skill-card {
     background-color: var(--card-bg);
     border: 1px solid var(--border);
@@ -536,11 +370,6 @@ main {
 /* ========================================
    Projects Section
    ======================================== */
-.projects-section {
-    margin-top: 5rem;
-    padding: 0 0 6rem;
-}
-
 .projects-container {
     display: flex;
     overflow-x: auto;
@@ -788,7 +617,7 @@ main {
     transform: scale(1.03);
 }
 
-/* Lightbox Modal Styles */
+/* Lightbox Modal */
 .lightbox-modal {
     display: none;
     position: fixed;
@@ -1025,7 +854,6 @@ main {
     opacity: 1;
 }
 
-/* Specific Node Type Variations */
 .input-node {
     border-color: rgba(217, 145, 120, 0.3);
 }
@@ -1314,7 +1142,7 @@ main {
     transform: rotate(-360deg);
 }
 
-/* Info Panel Hover Highlight Connector Rules */
+/* Info Panel Hover Highlight */
 .interactive-diagram.has-active-flow .flow-arrow,
 .interactive-diagram.has-active-flow .branch-connector,
 .interactive-diagram.has-active-flow .merge-connector-2,
@@ -1413,48 +1241,13 @@ main {
 }
 
 /* ========================================
-   Footer
-   ======================================== */
-.site-footer {
-    position: relative;
-    z-index: 1;
-    border-top: 1px solid var(--border);
-    padding: 3rem 2rem;
-    text-align: center;
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-}
-
-.site-footer a {
-    color: var(--accent);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.site-footer a:hover {
-    color: var(--accent-hover);
-}
-
-/* ========================================
    Responsive
    ======================================== */
 @media (max-width: 768px) {
-    .site-nav {
-        padding: 0 1rem;
-    }
-
-    header.hero {
-        padding: 5rem 1.5rem 3rem;
-        min-height: auto;
-    }
-
-    .hero-text h1 {
-        font-size: 2.2rem;
-        letter-spacing: -1px;
-    }
-
-    .hero-text .subtitle {
-        font-size: 0.95rem;
+    .hero-section,
+    .skills-section,
+    .projects-section {
+        padding: 4rem 1.5rem 3rem;
     }
 
     .project-card {

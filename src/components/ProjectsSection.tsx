@@ -51,7 +51,7 @@ export function ProjectsSection() {
   return (
     <section className="projects-section" id="projects">
       <div className="section-header">
-        <h2>Проекты</h2>
+        <h2 className="section-title">Проекты</h2>
         <p className="section-subtitle">Практические разработки в области машинного обучения и компьютерного зрения</p>
       </div>
 

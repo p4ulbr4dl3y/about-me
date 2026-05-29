@@ -32,7 +32,7 @@ function MarqueeRow({ skills, direction }: { skills: Skill[]; direction: 'left' 
 export function SkillsSection() {
   return (
     <section className="skills-section" id="skills">
-      <h2>Кое-что из того, с чем я работал</h2>
+      <h2 className="section-title">Кое-что из того, с чем я работал</h2>
       <div className="marquee-container">
         <MarqueeRow skills={skillsRow1} direction="left" />
         <MarqueeRow skills={skillsRow2} direction="right" />

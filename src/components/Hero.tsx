@@ -21,7 +21,7 @@ export function Hero() {
   }, [])
 
   return (
-    <header className="hero">
+    <section className="hero-section" id="about">
       <div className="hero-content">
         <div className="hero-text">
           <h1>Привет, я Егор</h1>
@@ -44,6 +44,6 @@ export function Hero() {
           <img src="/assets/avatar.jpg" alt="Егор" className="avatar" loading="eager" />
         </div>
       </div>
-    </header>
+    </section>
   )
 }
