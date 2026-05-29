@@ -626,9 +626,20 @@ main {
     gap: 1rem;
 }
 
+.inference-gallery-grid .inference-item {
+    aspect-ratio: 4/3;
+}
+
+.inference-gallery-grid .image-wrapper {
+    height: 100%;
+}
+
 @media (max-width: 640px) {
     .inference-gallery-grid {
         grid-template-columns: 1fr;
+    }
+    .inference-gallery-grid .inference-item {
+        aspect-ratio: auto;
     }
 }
 
@@ -648,7 +659,7 @@ main {
 
 .image-wrapper {
     width: 100%;
-    height: auto;
+    height: 100%;
     overflow: hidden;
     background-color: #050505;
     cursor: zoom-in;
@@ -659,9 +670,9 @@ main {
 
 .image-wrapper img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
-    object-fit: contain;
+    object-fit: cover;
     transition: transform 0.5s ease;
 }
 
