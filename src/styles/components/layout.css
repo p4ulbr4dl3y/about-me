@@ -1,0 +1,83 @@
+/* ========================================
+   Main Content & Layout
+   ======================================== */
+
+main {
+    position: relative;
+    z-index: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.hero-section,
+.skills-section,
+.projects-section {
+    padding: 5rem 2rem 4rem;
+}
+
+.reveal-section {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 0 2rem;
+}
+
+.section-header h2 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* VK Hackathon Grid */
+.vk-parallel-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.4rem;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .hero-section,
+    .skills-section,
+    .projects-section {
+        padding: 4rem 1.5rem 3rem;
+    }
+
+    .project-card {
+        padding: 1.25rem;
+    }
+
+    .scroll-top-btn {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        width: 40px;
+        height: 40px;
+    }
+
+    .vk-parallel-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.5rem !important;
+    }
+}

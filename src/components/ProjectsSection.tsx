@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect, useCallback } from 'react'
-import { ImageWithLightbox } from './ImageWithLightbox'
-
-const PROJECT_COUNT = 3
+import { projects } from '../data/projects'
+import { ProjectCard } from './ProjectCard'
 
 function smoothScrollTo(targetY: number, duration = 500) {
   const startY = window.scrollY
@@ -14,49 +13,12 @@ function smoothScrollTo(targetY: number, duration = 500) {
     if (!startTime) startTime = time
     const elapsed = time - startTime
     const progress = Math.min(elapsed / duration, 1)
-    // ease-out cubic
     const ease = 1 - Math.pow(1 - progress, 3)
     window.scrollTo(0, startY + diff * ease)
     if (progress < 1) requestAnimationFrame(step)
   }
 
   requestAnimationFrame(step)
-}
-
-function AsciiDiagram({ file, title }: { file: string; title: string }) {
-  const [content, setContent] = useState<string>('')
-  const [visible, setVisible] = useState(false)
-  const [loaded, setLoaded] = useState(false)
-
-  useEffect(() => {
-    fetch(`/assets/diagrams/${file}`)
-      .then(res => res.text())
-      .then(text => {
-        setContent(text)
-        setLoaded(true)
-      })
-      .catch(() => {
-        setContent('Ошибка загрузки диаграммы')
-        setLoaded(true)
-      })
-  }, [file])
-
-  return (
-    <div className="ascii-diagram">
-      <button
-        className="ascii-diagram-prompt"
-        onClick={() => setVisible(v => !v)}
-     >
-        <span className="prompt-symbol">$</span> cat {title}
-        <span className="prompt-cursor" />
-      </button>
-      {visible && loaded && (
-        <div className="ascii-diagram-content">
-          <pre>{content}</pre>
-        </div>
-      )}
-    </div>
-  )
 }
 
 export function ProjectsSection() {
@@ -101,7 +63,6 @@ export function ProjectsSection() {
         prevIndexRef.current = closest
         setActiveIndex(closest)
 
-        // Wait for horizontal scroll to settle before scrolling page
         if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current)
         scrollTimerRef.current = window.setTimeout(() => {
           const card = cards[closest] as HTMLElement
@@ -126,111 +87,13 @@ export function ProjectsSection() {
       <h2 className="section-title">ls projects/</h2>
 
       <div className="projects-container" ref={containerRef}>
-        {/* Project 1: colreg-vision-node */}
-        <div className="project-card">
-          <div className="terminal-bar">
-            <span className="terminal-dot red"></span>
-            <span className="terminal-dot yellow"></span>
-            <span className="terminal-dot green"></span>
-            <span className="terminal-bar-text">colreg-vision-node — bash</span>
-          </div>
-          <div className="project-header">
-            <div className="project-title-area">
-              <h3>colreg-vision-node</h3>
-            </div>
-          </div>
-
-          <div className="project-info-side">
-            <div className="project-full-desc">
-              <p>
-                Система разработана для повышения безопасности автономного и ассистируемого судоходства. Она автоматически распознаёт навигационный статус встречных судов в соответствии с МППСС-72. Алгоритм анализирует дневные сигнальные фигуры (шары, цилиндры, ромбы, конусы) или ночные огни (топовые, бортовые, кормовые, круговые).
-              </p>
-              <p>
-                Особое внимание уделено надёжности: при ухудшении видимости (туман, ночь, осадки) система переключается на мультимодальный режим с использованием ИК-камеры, совмещая тепловизионные рамки с цветным оптическим каналом.
-              </p>
-            </div>
-
-            <AsciiDiagram file="colreg-pipeline-simple.txt" title="pipeline_simple.txt" />
-            <AsciiDiagram file="colreg-pipeline-detailed.txt" title="pipeline_detailed.txt" />
-
-            <div className="inference-gallery inference-gallery-grid">
-              <ImageWithLightbox
-                src="/assets/colreg/original_result_no_expansion.jpg"
-                alt="Детекция в ИК спектре"
-              />
-              <ImageWithLightbox
-                src="/assets/colreg/photo_result_nuc_at_2.5.jpg"
-                alt="Детекция в RGB спектре"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Project 2: Cellsistant */}
-        <div className="project-card">
-          <div className="terminal-bar">
-            <span className="terminal-dot red"></span>
-            <span className="terminal-dot yellow"></span>
-            <span className="terminal-dot green"></span>
-            <span className="terminal-bar-text">cellsistant — bash</span>
-          </div>
-          <div className="project-header">
-            <div className="project-title-area">
-              <h3>cellsistant</h3>
-            </div>
-          </div>
-
-          <div className="project-info-side">
-            <div className="project-full-desc">
-              <p>
-                Cellsistant превращает среду JupyterLab в интерактивную площадку под управлением ИИ-агента. Расширение реализует полноценный цикл планирования и вызова инструментов (ReAct Loop) с 19 инструментами в 5 категориях: управление ноутбуками, файловая система, терминал, установка пакетов и поиск.
-              </p>
-              <p>
-                Ассистент может самостоятельно создавать, редактировать и запускать ячейки ноутбука, анализировать графики с помощью зрения (Vision), а также выполнять терминальные команды в безопасной песочнице с 4 уровнями доступа и блокировкой деструктивных команд. Поддерживает два режима: Agent (полный доступ) и Ask (только чтение).
-              </p>
-            </div>
-
-            <AsciiDiagram file="cellsistant-react-loop.txt" title="react_loop.txt" />
-
-            <div className="inference-gallery">
-              <ImageWithLightbox
-                src="/assets/cellsistant/demo.gif"
-                alt="Cellsistant Demo GIF"
-                fullWidth
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Project 3: VK Workspace Intelligent Search */}
-        <div className="project-card">
-          <div className="terminal-bar">
-            <span className="terminal-dot red"></span>
-            <span className="terminal-dot yellow"></span>
-            <span className="terminal-dot green"></span>
-            <span className="terminal-bar-text">vk-workspace-search — bash</span>
-          </div>
-          <div className="project-header">
-            <div className="project-title-area">
-              <h3>vk-workspace-search</h3>
-            </div>
-          </div>
-
-          <div className="project-info-side">
-            <div className="project-full-desc">
-              <p>
-                Высокопроизводительный поисковый движок для экосистемы VK Workspace, разработанный на хакатоне Samsung IT Academy 2026. Индексация использует скользящее окно с перекрытием для чанков и обогащает сообщения «семантическими якорями» (авторство, цитирование, вложенные файлы).
-              </p>
-              <p>
-                В основе поиска лежит ансамбль <strong>Alpha-Blending</strong> (4 параллельных потока: dense, HyDE, sparse main/opt), объединяемый по схеме <strong>RRF Fusion</strong> в Qdrant. Финальное ранжирование выполняется кросс-энкодером Llama-Nemotron-Reranker-1B с эвристическим бустингом. Результат: <strong>Recall@50 = 0.62</strong>, <strong>nDCG@50 = 0.52</strong>, улучшение на <strong>30%</strong> относительно бейзлайна.
-              </p>
-            </div>
-          </div>
-        </div>
+        {projects.map(project => (
+          <ProjectCard key={project.id} project={project} />
+        ))}
       </div>
 
       <div className="project-nav">
-        {Array.from({ length: PROJECT_COUNT }).map((_, i) => (
+        {projects.map((_, i) => (
           <button
             key={i}
             className={`project-dot ${activeIndex === i ? 'active' : ''}`}
