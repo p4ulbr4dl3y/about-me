@@ -481,18 +481,7 @@ main {
     max-width: 800px;
 }
 
-.project-grid {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 3rem;
-}
 
-@media (max-width: 1024px) {
-    .project-grid {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-    }
-}
 
 .project-info-side h4 {
     font-size: 1.2rem;
@@ -525,6 +514,64 @@ main {
 
 .project-full-desc p:last-child {
     margin-bottom: 0;
+}
+
+/* Project Tabs */
+.project-tabs {
+    display: flex;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0;
+    margin-bottom: 2rem;
+}
+
+.project-tab-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 10px 10px 0 0;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.project-tab-btn:hover {
+    color: var(--text-primary);
+    background-color: var(--muted);
+}
+
+.project-tab-btn.active {
+    color: var(--accent);
+    background-color: rgba(217, 145, 120, 0.08);
+}
+
+.project-tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--accent);
+    border-radius: 1px 1px 0 0;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.project-tab-btn.active::after {
+    opacity: 1;
+}
+
+.project-tab-panel {
+    animation: tabPanelFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes tabPanelFadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* Tags */
