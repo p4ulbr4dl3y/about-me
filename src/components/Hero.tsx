@@ -37,7 +37,7 @@ export function Hero() {
           <span className="terminal-dot red"></span>
           <span className="terminal-dot yellow"></span>
           <span className="terminal-dot green"></span>
-          <span className="terminal-bar-text">yegor@portfolio:~</span>
+          <span className="terminal-bar-text">p4ulbr4dl3y@portfolio:~</span>
         </div>
         <div className="hero-body">
           <div className="hero-text">
