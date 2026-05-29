@@ -1039,24 +1039,65 @@ main {
     width: 100%;
 }
 
+/* Branch Connector - CSS only */
 .branch-connector {
     width: 100%;
-    height: 28px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
     position: relative;
     color: rgba(96, 96, 104, 0.5);
     transition: color 0.3s ease;
 }
 
-.branch-connector-svg {
-    width: 100%;
-    height: 100%;
-}
-
 .interactive-diagram.has-active-flow .branch-connector {
     color: var(--accent);
+}
+
+.branch-line-down {
+    width: 2px;
+    height: 10px;
+    background-color: currentColor;
+}
+
+.branch-split {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    height: 20px;
+}
+
+/* Horizontal bar connecting left and right */
+.branch-split::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 25%;
+    right: 25%;
+    height: 2px;
+    background-color: currentColor;
+}
+
+.branch-arm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+}
+
+.branch-arm-line {
+    width: 2px;
+    height: 18px;
+    background-color: currentColor;
+}
+
+.branch-arm-arrow {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid currentColor;
 }
 
 .branch-lines {
@@ -1126,27 +1167,63 @@ main {
     visibility: hidden;
 }
 
-/* Merge Connectors */
+/* Merge Connectors - CSS only */
 .merge-connector-2, .merge-connector-4 {
     width: 100%;
-    height: 32px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
     position: relative;
     color: rgba(96, 96, 104, 0.5);
     transition: color 0.3s ease;
     margin: 0.15rem 0;
 }
 
-.merge-connector-svg {
-    width: 100%;
-    height: 100%;
-}
-
 .interactive-diagram.has-active-flow .merge-connector-2,
 .interactive-diagram.has-active-flow .merge-connector-4 {
     color: var(--accent);
+}
+
+.merge-split {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.merge-split-4 {
+    justify-content: space-around;
+}
+
+.merge-arm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.merge-arm-line {
+    width: 2px;
+    height: 10px;
+    background-color: currentColor;
+}
+
+.merge-bar {
+    width: 100%;
+    height: 2px;
+    background-color: currentColor;
+}
+
+.merge-line-down {
+    width: 2px;
+    height: 12px;
+    background-color: currentColor;
+}
+
+.merge-arrow {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid currentColor;
 }
 
 /* Loopback Badge */
