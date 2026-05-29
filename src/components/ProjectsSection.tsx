@@ -25,27 +25,36 @@ function smoothScrollTo(targetY: number, duration = 500) {
 
 function AsciiDiagram({ file, title }: { file: string; title: string }) {
   const [content, setContent] = useState<string>('')
-  const [loading, setLoading] = useState(true)
+  const [visible, setVisible] = useState(false)
+  const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
     fetch(`/assets/diagrams/${file}`)
       .then(res => res.text())
       .then(text => {
         setContent(text)
-        setLoading(false)
+        setLoaded(true)
       })
       .catch(() => {
         setContent('Ошибка загрузки диаграммы')
-        setLoading(false)
+        setLoaded(true)
       })
   }, [file])
 
   return (
     <div className="ascii-diagram">
-      <div className="ascii-diagram-header">
-        <span className="ascii-diagram-title">$ cat {title}</span>
-      </div>
-      <pre>{loading ? 'Загрузка...' : content}</pre>
+      <button
+        className="ascii-diagram-prompt"
+        onClick={() => setVisible(v => !v)}
+     >
+        <span className="prompt-symbol">$</span> cat {title}
+        <span className="prompt-cursor" />
+      </button>
+      {visible && loaded && (
+        <div className="ascii-diagram-content">
+          <pre>{content}</pre>
+        </div>
+      )}
     </div>
   )
 }

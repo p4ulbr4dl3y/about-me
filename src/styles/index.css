@@ -611,25 +611,71 @@ main {
 
 /* ASCII Diagrams */
 .ascii-diagram {
-    background-color: var(--muted);
+    margin-top: 0.75rem;
+}
+
+.ascii-diagram-prompt {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--muted);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    overflow: hidden;
-    margin-top: 1rem;
+    padding: 0.6rem 1rem;
+    color: var(--text-primary);
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+    width: 100%;
+    text-align: left;
 }
 
-.ascii-diagram-header {
-    background-color: rgba(0, 0, 0, 0.3);
-    border-bottom: 1px solid var(--border);
-    padding: 0.5rem 1rem;
+.ascii-diagram-prompt:hover {
+    border-color: var(--accent);
 }
 
-.ascii-diagram-title {
+.prompt-symbol {
     color: var(--terminal-green);
-    font-size: 0.8rem;
+    font-weight: 600;
 }
 
-.ascii-diagram pre {
+.prompt-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 1.1em;
+    background-color: var(--terminal-green);
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    animation: cursorBlink 1s step-end infinite;
+}
+
+@keyframes cursorBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.ascii-diagram-content {
+    background-color: var(--muted);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+    animation: diagramReveal 0.3s ease-out;
+    overflow: hidden;
+}
+
+@keyframes diagramReveal {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ascii-diagram-content pre {
     color: var(--terminal-cyan);
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
     font-size: 0.75rem;
