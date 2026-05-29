@@ -112,11 +112,9 @@ export function ProjectsSection() {
               <span className="tech-tag">PyTorch</span>
               <span className="tech-tag">YOLOv8</span>
               <span className="tech-tag">EfficientNet</span>
-              <span className="tech-tag">Sensor Fusion</span>
               <span className="tech-tag">OpenCV</span>
-              <span className="tech-tag">MQTT</span>
-              <span className="tech-tag">BoT-SORT</span>
-              <span className="tech-tag">Polars</span>
+              <span className="tech-tag">NumPy</span>
+              <span className="tech-tag">Pillow</span>
             </div>
 
             <div className="inference-gallery inference-gallery-grid">
