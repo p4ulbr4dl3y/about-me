@@ -1,6 +1,5 @@
 import { type ReactNode } from 'react'
 import { DiagramProvider } from './DiagramContext'
-import { DiagramInfoPanel } from './DiagramInfoPanel'
 
 interface DiagramContainerProps {
   children: ReactNode
@@ -12,7 +11,6 @@ export function DiagramContainer({ children, defaultText }: DiagramContainerProp
     <DiagramProvider defaultText={defaultText}>
       <div className="project-diagrams-side">
         {children}
-        <DiagramInfoPanel />
       </div>
     </DiagramProvider>
   )

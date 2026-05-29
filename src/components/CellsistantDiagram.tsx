@@ -6,14 +6,14 @@ import { LoopbackBadge } from './LoopbackBadge'
 
 export function CellsistantDiagram() {
   return (
-    <DiagramContainer defaultText="Наведите курсор на элементы схемы или кликните по ним, чтобы увидеть подробное описание каждого этапа работы ИИ-агента в цикле ReAct.">
+    <DiagramContainer defaultText="Наведите курсор на элементы схемы, чтобы увидеть подробное описание каждого этапа работы ИИ-агента в цикле ReAct.">
       <div className="diagram-tabs">
         <button className="tab-btn active">Схема: Цикл ИИ-агента (Agent Loop)</button>
       </div>
 
       <div className="diagram-viewport">
         <DiagramFlow diagramId="diagram-cellsistant-container">
-          <FlowNode nodeId="cellsistant-input" title="Входной запрос пользователя" desc="Инструкция на естественном языке" type="input" badge="Запрос" badgeType="input" />
+          <FlowNode nodeId="cellsistant-input" title="Входной запрос пользователя" desc="Инструкция на естественном языке" type="input" />
           <FlowArrow />
           <FlowNode nodeId="cellsistant-context" title="Формирование контекста" desc="Сбор состояния ноутбуков и файлов" />
           <FlowArrow />
@@ -21,7 +21,7 @@ export function CellsistantDiagram() {
           <FlowArrow />
 
           <div className="flow-branch-container">
-            <FlowNode nodeId="cellsistant-decision" title="Модель выбрала инструмент?" desc="" type="condition" badge="Решение" badgeType="decision" />
+            <FlowNode nodeId="cellsistant-decision" title="Модель выбрала инструмент?" desc="" type="condition" />
             <BranchConnector />
             <BranchLines
               left={
@@ -44,7 +44,7 @@ export function CellsistantDiagram() {
                   <FlowArrow />
                   <FlowNode nodeId="cellsistant-response" title="Формирование ответа" desc="Вывод итогового решения юзеру" />
                   <FlowArrow />
-                  <FlowNode nodeId="cellsistant-end" title="Завершение эпизода" desc="Ожидание нового запроса" type="output" badge="Выход" badgeType="output" />
+                  <FlowNode nodeId="cellsistant-end" title="Завершение эпизода" desc="Ожидание нового запроса" type="output" />
                 </>
               }
             />

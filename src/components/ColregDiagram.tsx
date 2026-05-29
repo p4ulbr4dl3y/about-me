@@ -7,7 +7,7 @@ import { FlowArrow, BranchConnector, BranchLines, BranchLabel } from './SvgConne
 function RgbPipeline() {
   return (
     <DiagramFlow diagramId="diagram-rgb-container">
-      <FlowNode nodeId="input-rgb" title="Входное изображение" desc="RGB-кадр с камеры высокого разрешения" type="input" badge="Вход RGB" badgeType="input" />
+      <FlowNode nodeId="input-rgb" title="Входное изображение" desc="RGB-кадр с камеры высокого разрешения" type="input" />
       <FlowArrow />
       <FlowNode nodeId="yolo-detect" title="Детекция судов YOLO" desc="Локализация судов и построение рамок" />
       <FlowArrow />
@@ -17,7 +17,7 @@ function RgbPipeline() {
       <FlowArrow />
 
       <div className="flow-branch-container">
-        <FlowNode nodeId="mode-switch" title="Режим работы" desc="" type="condition" badge="Решение" badgeType="decision" />
+        <FlowNode nodeId="mode-switch" title="Режим работы" desc="" type="condition" />
         <BranchConnector />
         <BranchLines
           left={
@@ -40,7 +40,7 @@ function RgbPipeline() {
       <FlowArrow />
       <FlowNode nodeId="colreg-hierarchy" title="Применение иерархии" desc="Логический вывод класса судна по МППСС" />
       <FlowArrow />
-      <FlowNode nodeId="final-output" title="Результат" desc="Типы судов и уверенность предсказания" type="output" badge="Результат" badgeType="output" />
+      <FlowNode nodeId="final-output" title="Результат" desc="Типы судов и уверенность предсказания" type="output" />
     </DiagramFlow>
   )
 }
@@ -49,8 +49,8 @@ function MultimodalPipeline() {
   return (
     <DiagramFlow diagramId="diagram-multimodal-container">
       <div className="dual-input-row">
-        <FlowNode nodeId="input-ir" title="ИК-изображение" desc="Кадр с тепловизионной камеры" type="input" badge="Вход ИК" badgeType="input" />
-        <FlowNode nodeId="input-visible" title="Видимое изображение" desc="Кадр с RGB-камеры" type="input" badge="Вход RGB" badgeType="input" />
+        <FlowNode nodeId="input-ir" title="ИК-изображение" desc="Кадр с тепловизионной камеры" type="input" />
+        <FlowNode nodeId="input-visible" title="Видимое изображение" desc="Кадр с RGB-камеры" type="input" />
       </div>
       <div className="dual-arrow-row">
         <FlowArrow />
@@ -79,7 +79,7 @@ function MultimodalPipeline() {
       <FlowArrow />
       <FlowNode nodeId="yolo-lights-fusion" title="Классификация огней YOLO" desc="Детекция огней на совмещенных фрагментах" />
       <FlowArrow />
-      <FlowNode nodeId="fusion-output" title="Формирование результата" desc="Навигационный статус по МППСС" type="output" badge="Результат" badgeType="output" />
+      <FlowNode nodeId="fusion-output" title="Формирование результата" desc="Навигационный статус по МППСС" type="output" />
     </DiagramFlow>
   )
 }

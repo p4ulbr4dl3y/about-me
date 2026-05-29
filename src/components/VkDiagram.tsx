@@ -7,13 +7,13 @@ import { FlowArrow, MergeConnector4 } from './SvgConnectors'
 function IndexingPipeline() {
   return (
     <DiagramFlow diagramId="diagram-vk-indexing">
-      <FlowNode nodeId="vk-messages" title="Входные сообщения" desc="Сырые чаты и медиафайлы из VK Workspace" type="input" badge="Вход" badgeType="input" />
+      <FlowNode nodeId="vk-messages" title="Входные сообщения" desc="Сырые чаты и медиафайлы из VK Workspace" type="input" />
       <FlowArrow />
       <FlowNode nodeId="vk-anchors" title="render_v20: семантические якоря" desc="Обогащение метаданными и связями" />
       <FlowArrow />
       <FlowNode nodeId="vk-chunking" title="Чанкирование: 512/128" desc="Разбиение скользящим окном" />
       <FlowArrow />
-      <FlowNode nodeId="vk-qdrant-index" title="Qdrant: плотные и BM25 векторы" desc="Гибридное векторирование в БД" type="output" badge="Индекс" badgeType="output" />
+      <FlowNode nodeId="vk-qdrant-index" title="Qdrant: плотные и BM25 векторы" desc="Гибридное векторирование в БД" type="output" />
     </DiagramFlow>
   )
 }
@@ -21,7 +21,7 @@ function IndexingPipeline() {
 function SearchingPipeline() {
   return (
     <DiagramFlow diagramId="diagram-vk-searching">
-      <FlowNode nodeId="vk-query" title="Вопрос пользователя" desc="Текстовый запрос сотрудника в поиске" type="input" badge="Запрос" badgeType="input" />
+      <FlowNode nodeId="vk-query" title="Вопрос пользователя" desc="Текстовый запрос сотрудника в поиске" type="input" />
       <FlowArrow />
 
       <div className="vk-parallel-grid">
@@ -67,14 +67,14 @@ function SearchingPipeline() {
       <FlowArrow />
       <FlowNode nodeId="vk-sharpener" title="Post-processing: NDCG Sharpener" desc="Повышение точности и диверсификации" />
       <FlowArrow />
-      <FlowNode nodeId="vk-final-top50" title="Финальная выдача: топ-50 ID" desc="Итоговый список релевантных сообщений" type="output" badge="Результат" badgeType="output" />
+      <FlowNode nodeId="vk-final-top50" title="Финальная выдача: топ-50 ID" desc="Итоговый список релевантных сообщений" type="output" />
     </DiagramFlow>
   )
 }
 
 export function VkDiagram() {
   return (
-    <DiagramContainer defaultText="Наведите курсор на элементы схемы или кликните по ним, чтобы увидеть подробное описание каждого этапа индексации и поиска сообщений.">
+    <DiagramContainer defaultText="Наведите курсор на элементы схемы, чтобы увидеть подробное описание каждого этапа индексации и поиска сообщений.">
       <TabDiagram
         tabs={[
           { id: 'vk-indexing-pipeline', label: 'Схема 1: Индексация данных', content: <IndexingPipeline /> },

@@ -1,13 +1,12 @@
 import { useRef } from 'react'
 import { useDiagram } from './DiagramContext'
+import { nodeData } from '../data/nodeData'
 
 interface FlowNodeProps {
   nodeId: string
   title: string
   desc: string
   type?: 'input' | 'condition' | 'output' | 'default'
-  badge?: string
-  badgeType?: 'input' | 'decision' | 'output'
   className?: string
   style?: React.CSSProperties
 }
@@ -17,8 +16,6 @@ export function FlowNode({
   title,
   desc,
   type = 'default',
-  badge,
-  badgeType,
   className = '',
   style,
 }: FlowNodeProps) {
@@ -34,16 +31,8 @@ export function FlowNode({
           ? 'output-node'
           : ''
 
-  const badgeClass =
-    badgeType === 'input'
-      ? 'input-badge'
-      : badgeType === 'decision'
-        ? 'decision-badge'
-        : badgeType === 'output'
-          ? 'output-badge'
-          : ''
-
   const isActive = activeNodeId === nodeId
+  const fullData = nodeData[nodeId]
 
   return (
     <div
@@ -55,9 +44,13 @@ export function FlowNode({
       onClick={() => handleNodeHover(nodeId)}
       onMouseLeave={handleNodeLeave}
     >
-      {badge && <div className={`node-badge ${badgeClass}`}>{badge}</div>}
       <div className="node-title">{title}</div>
       <div className="node-desc">{desc}</div>
+      {isActive && fullData && (
+        <div className="node-expanded">
+          <p>{fullData.desc}</p>
+        </div>
+      )}
     </div>
   )
 }
