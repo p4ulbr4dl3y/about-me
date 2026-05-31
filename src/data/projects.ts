@@ -69,5 +69,19 @@ export const projects: Project[] = [
       { src: '/assets/lego-minifig/demo.jpg', alt: 'Интерфейс системы идентификации LEGO-минифигур' },
     ],
   },
+  {
+    id: 'cellsistant',
+    terminalTitle: 'cellsistant — bash',
+    title: 'cellsistant',
+    description: [
+      'Расширение для JupyterLab, превращающее ноутбук в среду работы ИИ-агента. Ассистент управляет ячейками, анализирует данные и выполняет команды в терминале, самостоятельно планируя последовательность действий. Набор из 19 инструментов позволяет агенту взаимодействовать с ноутбуком, файловой системой и терминалом, а визуальный модуль - анализировать графики и изображения.',
+    ],
+    diagrams: [
+      { file: 'cellsistant-react-loop.txt', title: 'react_loop.txt' },
+    ],
+    images: [
+      { src: '/assets/cellsistant/demo.gif', alt: 'Cellsistant - демонстрация работы агента', fullWidth: true },
+    ],
+  },
 
 ]
