@@ -77,6 +77,3 @@
     object-fit: contain;
 }
 
-.invert-dark {
-    filter: invert(1) brightness(2);
-}

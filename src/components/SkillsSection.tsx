@@ -5,7 +5,7 @@ import { resolveAsset } from '../utils/resolveAsset'
 function SkillCard({ skill }: { skill: Skill }) {
   return (
     <div className="skill-card">
-      <img src={resolveAsset(skill.icon)} alt={skill.name} className={skill.invertDark ? 'invert-dark' : ''} />
+      <img src={resolveAsset(skill.icon)} alt={skill.name} />
       <span>{skill.name}</span>
     </div>
   )
