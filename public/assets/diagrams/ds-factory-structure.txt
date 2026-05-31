@@ -1,0 +1,17 @@
+ds-factory/                                                                                                                       
+   ├── 00_general_python_chat/                                                                                                       
+   │   ├── INSTRUCTIONS.md       # промпт для LLM-генерации диалогов                                                                 
+   │   ├── topics.txt            # темы                                                                  
+   │   └── output/                                                                                                                   
+   │       └── task_*.json       # сгенерированные диалоги                                                                           
+   │                                                                                                                                 
+   ├── 01_pandas_numpy/                                                                       
+   ├── 02_ml_classic/                                                                        
+   ├── 03_visualization/                                                                                
+   ├── 04_deep_learning/                                                                 
+   │                                                                                                                                 
+   ├── collect_dataset.py        # собирает все output/*.json в единый JSONL                                                         
+   │                                                                                                                                 
+   └── shared/                                                                                                                       
+       ├── make_ruff_sharegpt.py # валидация кода через Ruff, сохранение в ShareGPT JSON                                             
+       └── ...                                        

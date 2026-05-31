@@ -95,5 +95,20 @@ export const projects: Project[] = [
       { src: '/assets/chart-expert/demo.png', alt: 'Chart Expert - пример анализа графика' },
     ],
   },
+  {
+    id: 'datascience-expert',
+    terminalTitle: 'datascience-expert — bash',
+    title: 'datascience-expert',
+    description: [
+      'Русскоязычная модель для Data Science на базе Qwen2.5-Coder-1.5B. Специализируется на pandas, numpy, визуализации, классическом и глубоком машинном обучении. Дообучена методом LoRA через библиотеку Unsloth на датасете из 2500 примеров, сгенерированном командой агентов по пяти тематическим категориям.',
+      'После адаптации модель квантизирована в формат GGUF q4_k_m, итоговый объем составляет менее одного гигабайта.',
+    ],
+    diagrams: [
+      { file: 'ds-factory-structure.txt', title: 'data_generation.txt' },
+    ],
+    images: [
+      { src: '/assets/datascience-expert/demo.gif', alt: 'DataScience Expert - демонстрация работы модели', fullWidth: true },
+    ],
+  },
 
 ]
