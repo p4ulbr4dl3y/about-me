@@ -1,21 +1,5 @@
-import { createContext, useContext, useState, useCallback, type ReactNode } from 'react'
-
-interface LightboxContextValue {
-  isOpen: boolean
-  src: string
-  alt: string
-  caption: ReactNode
-  openLightbox: (src: string, alt: string, caption: ReactNode) => void
-  closeLightbox: () => void
-}
-
-const LightboxContext = createContext<LightboxContextValue | null>(null)
-
-export function useLightbox() {
-  const ctx = useContext(LightboxContext)
-  if (!ctx) throw new Error('useLightbox must be used within LightboxProvider')
-  return ctx
-}
+import { useState, useCallback, useEffect, type ReactNode } from 'react'
+import { LightboxContext, type LightboxContextValue } from './lightboxContextValue'
 
 export function LightboxProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -28,16 +12,32 @@ export function LightboxProvider({ children }: { children: ReactNode }) {
     setAlt(newAlt)
     setCaption(newCaption)
     setIsOpen(true)
-    document.body.style.overflow = 'hidden'
   }, [])
 
   const closeLightbox = useCallback(() => {
     setIsOpen(false)
-    document.body.style.overflow = ''
   }, [])
 
+  useEffect(() => {
+    if (!isOpen) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [isOpen])
+
+  const value: LightboxContextValue = {
+    isOpen,
+    src,
+    alt,
+    caption,
+    openLightbox,
+    closeLightbox,
+  }
+
   return (
-    <LightboxContext.Provider value={{ isOpen, src, alt, caption, openLightbox, closeLightbox }}>
+    <LightboxContext.Provider value={value}>
       {children}
     </LightboxContext.Provider>
   )

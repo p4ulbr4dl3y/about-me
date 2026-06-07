@@ -48,6 +48,18 @@
     animation: scroll-right 40s linear infinite;
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .track-left,
+    .track-right {
+        animation: none;
+    }
+    .marquee-container {
+        mask-image: none;
+        -webkit-mask-image: none;
+        overflow-x: auto;
+    }
+}
+
 @keyframes scroll-left {
     to { transform: translateX(-50%); }
 }

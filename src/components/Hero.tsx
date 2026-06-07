@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { resolveAsset } from '../utils/resolveAsset'
 
 const consoleLines = [
@@ -14,24 +14,53 @@ const consoleLines = [
   { type: 'output', text: 'способы встроить их в реальные продукты.' },
 ]
 
+const REDUCED_MOTION = typeof window !== 'undefined'
+  && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
 export function Hero() {
-  const [visibleLines, setVisibleLines] = useState(0)
+  const [visibleLines, setVisibleLines] = useState(REDUCED_MOTION ? consoleLines.length : 0)
+  const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
+    if (REDUCED_MOTION) return
+    const el = sectionRef.current
+    if (!el) return
+
     let i = 0
-    const interval = setInterval(() => {
-      if (i < consoleLines.length) {
-        setVisibleLines(prev => prev + 1)
-        i++
-      } else {
-        clearInterval(interval)
-      }
-    }, 150)
-    return () => clearInterval(interval)
+    let intervalId: number | null = null
+
+    const start = () => {
+      if (intervalId !== null) return
+      intervalId = window.setInterval(() => {
+        if (i < consoleLines.length) {
+          setVisibleLines(prev => prev + 1)
+          i++
+        } else if (intervalId !== null) {
+          clearInterval(intervalId)
+          intervalId = null
+        }
+      }, 150)
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          start()
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.1 },
+    )
+    observer.observe(el)
+
+    return () => {
+      observer.disconnect()
+      if (intervalId !== null) clearInterval(intervalId)
+    }
   }, [])
 
   return (
-    <section className="hero-section" id="about">
+    <section className="hero-section" id="about" ref={sectionRef}>
       <div className="hero-content">
         <div className="terminal-bar">
           <span className="terminal-dot red"></span>
@@ -52,7 +81,15 @@ export function Hero() {
             </div>
           </div>
           <div className="avatar-container">
-            <img src={resolveAsset('/assets/avatar.jpg')} alt="Егор" className="avatar" loading="eager" />
+            <img
+              src={resolveAsset('/assets/avatar.jpg')}
+              alt="Егор"
+              className="avatar"
+              loading="eager"
+              width="180"
+              height="180"
+              decoding="async"
+            />
           </div>
         </div>
       </div>

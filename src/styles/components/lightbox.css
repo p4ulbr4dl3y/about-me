@@ -68,7 +68,7 @@
 }
 
 .lightbox-modal {
-    display: none;
+    display: flex;
     position: fixed;
     z-index: 2000;
     left: 0;
@@ -120,17 +120,20 @@
     color: var(--text-secondary);
     font-size: 24px;
     font-weight: 300;
+    line-height: 1;
     transition: color 0.2s ease;
     cursor: pointer;
     user-select: none;
     width: 36px;
     height: 36px;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     background: var(--muted);
     border: 1px solid var(--border);
     border-radius: var(--radius);
+    font-family: inherit;
 }
 
 .lightbox-close:hover {

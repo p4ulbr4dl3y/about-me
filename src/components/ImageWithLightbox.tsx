@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react'
-import { useLightbox } from './LightboxContext'
+import { useLightbox } from './useLightbox'
 import { resolveAsset } from '../utils/resolveAsset'
 
 interface ImageWithLightboxProps {

@@ -17,12 +17,12 @@ function MarqueeRow({ skills, direction }: { skills: Skill[]; direction: 'left' 
       <div className={`marquee-track track-${direction}`}>
         <div className="marquee-content">
           {skills.map((skill) => (
-            <SkillCard key={skill.name} skill={skill} />
+            <SkillCard key={skill.icon} skill={skill} />
           ))}
         </div>
         <div className="marquee-content" aria-hidden="true">
           {skills.map((skill) => (
-            <SkillCard key={`${skill.name}-dup`} skill={skill} />
+            <SkillCard key={`${skill.icon}-dup`} skill={skill} />
           ))}
         </div>
       </div>

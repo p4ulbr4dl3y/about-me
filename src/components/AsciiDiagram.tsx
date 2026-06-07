@@ -12,23 +12,29 @@ export function AsciiDiagram({ file, title }: AsciiDiagramProps) {
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
-    fetch(resolveAsset(`/assets/diagrams/${file}`))
+    const controller = new AbortController()
+    fetch(resolveAsset(`/assets/diagrams/${file}`), { signal: controller.signal })
       .then(res => res.text())
       .then(text => {
         setContent(text)
         setLoaded(true)
       })
-      .catch(() => {
+      .catch(err => {
+        if (controller.signal.aborted) return
         setContent('Ошибка загрузки диаграммы')
         setLoaded(true)
+        console.error('AsciiDiagram fetch failed:', err)
       })
+    return () => controller.abort()
   }, [file])
 
   return (
     <div className="ascii-diagram">
       <button
+        type="button"
         className="ascii-diagram-prompt"
         onClick={() => setVisible(v => !v)}
+        aria-expanded={visible}
       >
         <span className="prompt-symbol">$</span> cat {title}
         <span className="prompt-cursor" />
