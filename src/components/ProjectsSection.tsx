@@ -2,11 +2,31 @@ import { useRef, useState, useEffect, useCallback } from 'react'
 import { projects } from '../data/projects'
 import { ProjectCard } from './ProjectCard'
 
+function smoothScrollTo(targetY: number, duration = 600) {
+  const startY = window.scrollY
+  const diff = targetY - startY
+  if (Math.abs(diff) < 2) return
+
+  let startTime: number | null = null
+
+  function step(time: number) {
+    if (!startTime) startTime = time
+    const elapsed = time - startTime
+    const progress = Math.min(elapsed / duration, 1)
+    const ease = 1 - Math.pow(1 - progress, 3)
+    window.scrollTo(0, startY + diff * ease)
+    if (progress < 1) requestAnimationFrame(step)
+  }
+
+  requestAnimationFrame(step)
+}
+
 export function ProjectsSection() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const prevIndexRef = useRef(0)
   const rafIdRef = useRef<number | null>(null)
+  const scrollTimerRef = useRef<number | null>(null)
   const cardsRef = useRef<HTMLElement[]>([])
 
   const refreshCards = useCallback(() => {
@@ -54,6 +74,16 @@ export function ProjectsSection() {
         if (closest !== prevIndexRef.current) {
           prevIndexRef.current = closest
           setActiveIndex(closest)
+
+          if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current)
+          scrollTimerRef.current = window.setTimeout(() => {
+            const card = cards[closest]
+            if (card) {
+              const cardTop = card.getBoundingClientRect().top + window.scrollY
+              const offset = 40
+              smoothScrollTo(cardTop - offset)
+            }
+          }, 300)
         }
       })
     }
@@ -62,6 +92,7 @@ export function ProjectsSection() {
     return () => {
       container.removeEventListener('scroll', handleScroll)
       if (rafIdRef.current !== null) cancelAnimationFrame(rafIdRef.current)
+      if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current)
     }
   }, [refreshCards])
 
