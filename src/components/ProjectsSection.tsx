@@ -5,20 +5,28 @@ import { ProjectCard } from './ProjectCard'
 function smoothScrollTo(targetY: number, duration = 600) {
   const startY = window.scrollY
   const diff = targetY - startY
-  if (Math.abs(diff) < 2) return
+  if (Math.abs(diff) < 2) return () => {}
 
   let startTime: number | null = null
+  let frameId: number | null = null
+  let cancelled = false
 
   function step(time: number) {
+    if (cancelled) return
     if (!startTime) startTime = time
     const elapsed = time - startTime
     const progress = Math.min(elapsed / duration, 1)
     const ease = 1 - Math.pow(1 - progress, 3)
     window.scrollTo(0, startY + diff * ease)
-    if (progress < 1) requestAnimationFrame(step)
+    if (progress < 1) frameId = requestAnimationFrame(step)
   }
 
-  requestAnimationFrame(step)
+  frameId = requestAnimationFrame(step)
+
+  return () => {
+    cancelled = true
+    if (frameId !== null) cancelAnimationFrame(frameId)
+  }
 }
 
 export function ProjectsSection() {
@@ -27,6 +35,7 @@ export function ProjectsSection() {
   const prevIndexRef = useRef(0)
   const rafIdRef = useRef<number | null>(null)
   const scrollTimerRef = useRef<number | null>(null)
+  const pageScrollCancelRef = useRef<(() => void) | null>(null)
   const cardsRef = useRef<HTMLElement[]>([])
 
   const refreshCards = useCallback(() => {
@@ -42,6 +51,11 @@ export function ProjectsSection() {
     if (!container) return
     const card = cardsRef.current[index] ?? container.querySelectorAll<HTMLElement>('.project-card')[index]
     if (!card) return
+    if (pageScrollCancelRef.current) pageScrollCancelRef.current()
+    if (scrollTimerRef.current) {
+      clearTimeout(scrollTimerRef.current)
+      scrollTimerRef.current = null
+    }
     const containerLeft = container.getBoundingClientRect().left
     const cardLeft = card.getBoundingClientRect().left
     const delta = cardLeft - containerLeft - (container.clientWidth - card.offsetWidth) / 2
@@ -75,13 +89,15 @@ export function ProjectsSection() {
           prevIndexRef.current = closest
           setActiveIndex(closest)
 
+          if (pageScrollCancelRef.current) pageScrollCancelRef.current()
           if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current)
           scrollTimerRef.current = window.setTimeout(() => {
+            scrollTimerRef.current = null
             const card = cards[closest]
             if (card) {
               const cardTop = card.getBoundingClientRect().top + window.scrollY
               const offset = 40
-              smoothScrollTo(cardTop - offset)
+              pageScrollCancelRef.current = smoothScrollTo(cardTop - offset)
             }
           }, 300)
         }
@@ -93,6 +109,7 @@ export function ProjectsSection() {
       container.removeEventListener('scroll', handleScroll)
       if (rafIdRef.current !== null) cancelAnimationFrame(rafIdRef.current)
       if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current)
+      if (pageScrollCancelRef.current) pageScrollCancelRef.current()
     }
   }, [refreshCards])
 
