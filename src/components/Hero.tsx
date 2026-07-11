@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { resolveAsset } from '../utils/resolveAsset'
 
 const consoleLines = [
-  { type: 'comment', text: '# Привет! Я Егор — ML инженер и разработчик' },
+  { type: 'comment', text: '# Привет! Я Егор :)' },
   { type: 'command', text: '$ cat about.txt' },
   { type: 'output', text: 'В программирование я пришёл в 2019 году — начинал с JavaScript' },
   { type: 'output', text: 'и написания ботов для Discord. Со временем интерес сместился' },
