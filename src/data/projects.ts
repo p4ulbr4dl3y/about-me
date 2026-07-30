@@ -40,6 +40,17 @@ export const projects: Project[] = [
     ],
   },
   {
+    id: 'johnston',
+    terminalTitle: 'johnston — bash',
+    title: 'johnston',
+    description: [
+      'На фоне растущей популярности harness-систем многие существующие решения огорчали меня громоздкостью, перерасходом токенов или привязкой к конкретным провайдерам. Поэтому я взял лучшие идеи из известных инструментов и реализовал собственный легковесный harness на Python — здесь есть всё необходимое для комфортной разработки.',
+    ],
+    images: [
+      { src: '/assets/johnston/demo.gif', alt: 'Johnston — демонстрация работы harness-системы', fullWidth: true },
+    ],
+  },
+  {
     id: 'autoboxer',
     terminalTitle: 'autoboxer — bash',
     title: 'autoboxer',
