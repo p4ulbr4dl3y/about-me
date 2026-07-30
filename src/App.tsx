@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { LightboxProvider } from './components/LightboxContext'
 import { Hero } from './components/Hero'
 import { SkillsSection } from './components/SkillsSection'
@@ -7,6 +8,13 @@ import { ScrollToTop } from './components/ScrollToTop'
 import { RevealSection } from './components/RevealSection'
 
 function App() {
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual'
+    }
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <LightboxProvider>
       <main>
