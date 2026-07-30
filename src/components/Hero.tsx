@@ -14,15 +14,19 @@ const consoleLines = [
   { type: 'output', text: 'способы встроить их в реальные продукты.' },
 ]
 
-const REDUCED_MOTION = typeof window !== 'undefined'
-  && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+function checkReducedMotion() {
+  return typeof window !== 'undefined'
+    && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+}
 
 export function Hero() {
-  const [visibleLines, setVisibleLines] = useState(REDUCED_MOTION ? consoleLines.length : 0)
+  const [visibleLines, setVisibleLines] = useState(() =>
+    checkReducedMotion() ? consoleLines.length : 0,
+  )
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    if (REDUCED_MOTION) return
+    if (checkReducedMotion()) return
     const el = sectionRef.current
     if (!el) return
 
@@ -63,9 +67,9 @@ export function Hero() {
     <section className="hero-section" id="about" ref={sectionRef}>
       <div className="hero-content">
         <div className="terminal-bar">
-          <span className="terminal-dot red"></span>
-          <span className="terminal-dot yellow"></span>
-          <span className="terminal-dot green"></span>
+          <span className="terminal-dot red" aria-hidden="true"></span>
+          <span className="terminal-dot yellow" aria-hidden="true"></span>
+          <span className="terminal-dot green" aria-hidden="true"></span>
           <span className="terminal-bar-text">p4ulbr4dl3y@portfolio:~</span>
         </div>
         <div className="hero-body">

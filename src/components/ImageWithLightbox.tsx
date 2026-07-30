@@ -14,9 +14,24 @@ export function ImageWithLightbox({ src, alt, caption, fullWidth }: ImageWithLig
   const [loaded, setLoaded] = useState(false)
   const resolvedSrc = resolveAsset(src)
 
+  const handleOpen = () => openLightbox(resolvedSrc, alt, caption ?? null)
+
   return (
     <div className="inference-item" style={fullWidth ? { gridColumn: 'span 2' } : undefined}>
-      <div className="image-wrapper" style={{ cursor: 'zoom-in', position: 'relative' }} onClick={() => openLightbox(resolvedSrc, alt, caption ?? null)}>
+      <div
+        className="image-wrapper"
+        role="button"
+        tabIndex={0}
+        aria-label={`Увеличить изображение: ${alt}`}
+        style={{ cursor: 'zoom-in', position: 'relative' }}
+        onClick={handleOpen}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            handleOpen()
+          }
+        }}
+      >
         {!loaded && (
           <div style={{
             position: 'absolute',

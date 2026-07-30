@@ -36,9 +36,9 @@ export function SkillsSection() {
       <h2 className="section-title">ls skills/</h2>
       <div className="skills-terminal">
         <div className="terminal-bar">
-          <span className="terminal-dot red"></span>
-          <span className="terminal-dot yellow"></span>
-          <span className="terminal-dot green"></span>
+          <span className="terminal-dot red" aria-hidden="true"></span>
+          <span className="terminal-dot yellow" aria-hidden="true"></span>
+          <span className="terminal-dot green" aria-hidden="true"></span>
           <span className="terminal-bar-text">skills — tree</span>
         </div>
         <div className="marquee-container">

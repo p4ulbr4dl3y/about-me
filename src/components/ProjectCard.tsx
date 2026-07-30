@@ -10,9 +10,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <div className="project-card">
       <div className="terminal-bar">
-        <span className="terminal-dot red"></span>
-        <span className="terminal-dot yellow"></span>
-        <span className="terminal-dot green"></span>
+        <span className="terminal-dot red" aria-hidden="true"></span>
+        <span className="terminal-dot yellow" aria-hidden="true"></span>
+        <span className="terminal-dot green" aria-hidden="true"></span>
         <span className="terminal-bar-text">{project.terminalTitle}</span>
       </div>
       <div className="project-header">
