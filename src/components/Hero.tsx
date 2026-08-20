@@ -1,87 +1,25 @@
-import { useState, useEffect, useRef } from 'react'
 import { resolveAsset } from '../utils/resolveAsset'
 
-const consoleLines = [
-  { type: 'comment', text: '# Привет! Я Егор :)' },
-  { type: 'command', text: '$ cat about.txt' },
-  { type: 'output', text: 'В программирование я пришёл в 2019 году — начинал с JavaScript' },
-  { type: 'output', text: 'и написания ботов для Discord. Со временем интерес сместился' },
-  { type: 'output', text: 'от скриптов к более глубоким задачам.' },
-  { type: 'empty', text: '' },
-  { type: 'command', text: '$ cat interests.txt' },
-  { type: 'output', text: 'Мне нравится решать интересные задачи, применяя нейросети' },
-  { type: 'output', text: 'в пайплайнах, — работать с большими моделями и находить' },
-  { type: 'output', text: 'способы встроить их в реальные продукты.' },
-]
-
-function checkReducedMotion() {
-  return typeof window !== 'undefined'
-    && window.matchMedia('(prefers-reduced-motion: reduce)').matches
-}
-
 export function Hero() {
-  const [visibleLines, setVisibleLines] = useState(() =>
-    checkReducedMotion() ? consoleLines.length : 0,
-  )
-  const sectionRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    if (checkReducedMotion()) return
-    const el = sectionRef.current
-    if (!el) return
-
-    let i = 0
-    let intervalId: number | null = null
-
-    const start = () => {
-      if (intervalId !== null) return
-      intervalId = window.setInterval(() => {
-        if (i < consoleLines.length) {
-          setVisibleLines(prev => prev + 1)
-          i++
-        } else if (intervalId !== null) {
-          clearInterval(intervalId)
-          intervalId = null
-        }
-      }, 150)
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          start()
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.1 },
-    )
-    observer.observe(el)
-
-    return () => {
-      observer.disconnect()
-      if (intervalId !== null) clearInterval(intervalId)
-    }
-  }, [])
-
   return (
-    <section className="hero-section" id="about" ref={sectionRef}>
+    <section className="hero-section" id="about">
       <div className="hero-content">
-        <div className="terminal-bar">
-          <span className="terminal-dot red" aria-hidden="true"></span>
-          <span className="terminal-dot yellow" aria-hidden="true"></span>
-          <span className="terminal-dot green" aria-hidden="true"></span>
-          <span className="terminal-bar-text">p4ulbr4dl3y@portfolio:~</span>
-        </div>
         <div className="hero-body">
           <div className="hero-text">
             <h1>whoami</h1>
 
             <div className="bio">
-              {consoleLines.slice(0, visibleLines).map((line, i) => (
-                <p key={i} className={`console-line console-${line.type}`}>
-                  {line.text}
-                </p>
-              ))}
+              <p className="bio-greeting">Привет! Я Егор :)</p>
+              <p>
+                В программирование я пришёл в 2019 году — начинал с JavaScript
+                и написания ботов для Discord. Со временем интерес сместился
+                от скриптов к более глубоким задачам.
+              </p>
+              <p>
+                Мне нравится решать интересные задачи, применяя нейросети
+                в пайплайнах, — работать с большими моделями и находить
+                способы встроить их в реальные продукты.
+              </p>
             </div>
           </div>
           <div className="avatar-container">

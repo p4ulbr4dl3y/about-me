@@ -11,7 +11,7 @@ export interface ProjectDiagram {
 
 export interface Project {
   id: string
-  terminalTitle: string
+  terminalTitle?: string
   title: string
   description: string[]
   /** Отдельный абзац с HTML-разметкой (опционально) */

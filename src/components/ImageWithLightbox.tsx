@@ -14,37 +14,15 @@ export function ImageWithLightbox({ src, alt, caption, fullWidth }: ImageWithLig
   const [loaded, setLoaded] = useState(false)
   const resolvedSrc = resolveAsset(src)
 
-  const handleOpen = () => openLightbox(resolvedSrc, alt, caption ?? null)
-
   return (
     <div className="inference-item" style={fullWidth ? { gridColumn: 'span 2' } : undefined}>
-      <div
+      <button
+        type="button"
         className="image-wrapper"
-        role="button"
-        tabIndex={0}
         aria-label={`Увеличить изображение: ${alt}`}
-        style={{ cursor: 'zoom-in', position: 'relative' }}
-        onClick={handleOpen}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault()
-            handleOpen()
-          }
-        }}
+        onClick={() => openLightbox(resolvedSrc, alt, caption ?? null)}
       >
-        {!loaded && (
-          <div style={{
-            position: 'absolute',
-            inset: 0,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'var(--text-secondary)',
-            fontSize: '0.8rem',
-          }}>
-            Загрузка...
-          </div>
-        )}
+        {!loaded && <div className="image-skeleton" aria-hidden="true" />}
         <img
           src={resolvedSrc}
           alt={alt}
@@ -52,7 +30,7 @@ export function ImageWithLightbox({ src, alt, caption, fullWidth }: ImageWithLig
           onLoad={() => setLoaded(true)}
           style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.3s ease' }}
         />
-      </div>
+      </button>
       {caption && <div className="inference-caption">{caption}</div>}
     </div>
   )

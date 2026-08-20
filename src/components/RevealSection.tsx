@@ -23,7 +23,7 @@ export function RevealSection({ children, className = '', id, delay = 0 }: Revea
           observer.unobserve(el)
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.01, rootMargin: '0px 0px -40px 0px' }
     )
 
     observer.observe(el)

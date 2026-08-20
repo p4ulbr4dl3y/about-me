@@ -33,18 +33,14 @@ function MarqueeRow({ skills, direction }: { skills: Skill[]; direction: 'left' 
 export function SkillsSection() {
   return (
     <section className="skills-section" id="skills">
-      <h2 className="section-title">ls skills/</h2>
-      <div className="skills-terminal">
-        <div className="terminal-bar">
-          <span className="terminal-dot red" aria-hidden="true"></span>
-          <span className="terminal-dot yellow" aria-hidden="true"></span>
-          <span className="terminal-dot green" aria-hidden="true"></span>
-          <span className="terminal-bar-text">skills — tree</span>
-        </div>
-        <div className="marquee-container">
-          <MarqueeRow skills={skillsRow1} direction="left" />
-          <MarqueeRow skills={skillsRow2} direction="right" />
-          <MarqueeRow skills={skillsRow3} direction="left" />
+      <div className="skills-content">
+        <h2 className="section-title">worked with</h2>
+        <div className="skills-card">
+          <div className="marquee-container">
+            <MarqueeRow skills={skillsRow1} direction="left" />
+            <MarqueeRow skills={skillsRow2} direction="right" />
+            <MarqueeRow skills={skillsRow3} direction="left" />
+          </div>
         </div>
       </div>
     </section>

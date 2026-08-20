@@ -32,12 +32,12 @@ export function AsciiDiagram({ file, title }: AsciiDiagramProps) {
     <div className="ascii-diagram">
       <button
         type="button"
-        className="ascii-diagram-prompt"
+        className="ascii-diagram-toggle"
         onClick={() => setVisible(v => !v)}
         aria-expanded={visible}
       >
-        <span className="prompt-symbol">$</span> cat {title}
-        <span className="prompt-cursor" />
+        <span className="diagram-title">{title}</span>
+        <span className="diagram-toggle-state">{visible ? 'hide' : 'show'}</span>
       </button>
       {visible && loaded && (
         <div className="ascii-diagram-content">

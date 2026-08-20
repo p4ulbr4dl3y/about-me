@@ -58,50 +58,24 @@
 .hero-text h1 {
     font-family: 'JetBrains Mono', monospace;
     font-size: 1.5rem;
-    font-weight: 400;
+    font-weight: 500;
     letter-spacing: 0;
-    margin-bottom: 1rem;
-    color: var(--text-primary);
-}
-
-.hero-text h1::before {
-    content: '$ ';
-    color: var(--terminal-green);
-}
-
-.location-age {
-    display: flex;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-}
-
-@media (max-width: 768px) {
-    .location-age {
-        justify-content: center;
-    }
-}
-
-.badge {
-    background-color: var(--card-bg);
-    padding: 0.35rem 0.9rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    border: 1px solid var(--border);
-    color: var(--text-secondary);
-    transition: all 0.2s ease;
-}
-
-.badge:hover {
-    border-color: var(--accent);
+    margin-bottom: 1.25rem;
     color: var(--text-primary);
 }
 
 .bio {
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     max-width: 100%;
-    line-height: 1.7;
+    line-height: 1.75;
+    letter-spacing: -0.01em;
+}
+
+.bio-greeting {
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
 }
 
 .bio p {
@@ -112,43 +86,8 @@
     margin-bottom: 0;
 }
 
-/* Console line styles */
-.console-line {
-    animation: fadeInLine 0.3s ease-out;
-    margin-bottom: 0.1rem;
-}
-
-.console-command {
-    color: var(--terminal-green);
-    font-weight: 400;
-}
-
-.console-output {
-    color: var(--text-secondary);
-    padding-left: 1.5rem;
-}
-
-.console-comment {
-    color: var(--text-secondary);
-    opacity: 0.6;
-}
-
-.console-empty {
-    height: 1rem;
-}
-
-@keyframes fadeInLine {
-    from { opacity: 0; transform: translateX(-5px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
 @media (max-width: 768px) {
     .hero-text h1 {
-        font-size: 2.2rem;
-        letter-spacing: -1px;
-    }
-
-    .hero-text .subtitle {
-        font-size: 0.95rem;
+        font-size: 1.35rem;
     }
 }
