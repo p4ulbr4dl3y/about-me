@@ -29,6 +29,7 @@ export const skillsRow2: Skill[] = [
 export const skillsRow3: Skill[] = [
   { name: 'FastAPI', icon: '/assets/icons/fastapi.svg' },
   { name: 'LangChain', icon: '/assets/icons/langchain.svg' },
+  { name: 'FastMCP', icon: '/assets/icons/fastmcp.svg' },
   { name: 'Docker', icon: '/assets/icons/docker.svg' },
   { name: 'Kubernetes', icon: '/assets/icons/kubernetes.svg' },
   { name: 'Git', icon: '/assets/icons/git.svg' },
