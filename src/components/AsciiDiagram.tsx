@@ -17,7 +17,12 @@ export function AsciiDiagram({ file, title }: AsciiDiagramProps) {
     fetch(resolveAsset(`/assets/diagrams/${file}`), { signal: controller.signal })
       .then(res => res.text())
       .then(text => {
-        setContent(text)
+        const cleaned = text
+          .split('\n')
+          .map(line => line.trimEnd())
+          .join('\n')
+          .trimEnd()
+        setContent(cleaned)
         setLoaded(true)
       })
       .catch(err => {
