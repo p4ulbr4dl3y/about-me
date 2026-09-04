@@ -27,9 +27,11 @@
     padding: 1.5rem 0;
 }
 
-.marquee-container:hover .track-left,
-.marquee-container:hover .track-right {
-    animation-play-state: paused;
+@media (hover: hover) {
+    .marquee-container:hover .track-left,
+    .marquee-container:hover .track-right {
+        animation-play-state: paused;
+    }
 }
 
 .marquee-row {

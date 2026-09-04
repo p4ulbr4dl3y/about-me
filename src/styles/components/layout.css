@@ -44,9 +44,17 @@ main {
     }
 
     .scroll-top-btn {
-        bottom: 1.5rem;
-        right: 1.5rem;
+        bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+        right: calc(1.5rem + env(safe-area-inset-right, 0px));
         width: 40px;
         height: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section,
+    .skills-section,
+    .projects-section {
+        padding: 2.75rem 0.85rem 2rem;
     }
 }

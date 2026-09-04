@@ -149,3 +149,13 @@
         justify-self: end;
     }
 }
+
+@media (max-width: 480px) {
+    .awards-section {
+        padding: 2rem 0.85rem 2rem;
+    }
+
+    .award-row {
+        padding: 0.75rem 0.85rem;
+    }
+}

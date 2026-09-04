@@ -67,5 +67,13 @@
     padding: 1rem;
     margin: 0;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     white-space: pre;
+}
+
+@media (max-width: 480px) {
+    .ascii-diagram-content pre {
+        padding: 0.75rem;
+        font-size: 0.72rem;
+    }
 }
