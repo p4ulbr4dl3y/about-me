@@ -12,6 +12,7 @@ export function AsciiDiagram({ file, title }: AsciiDiagramProps) {
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
+    if (!visible || loaded) return
     const controller = new AbortController()
     fetch(resolveAsset(`/assets/diagrams/${file}`), { signal: controller.signal })
       .then(res => res.text())
@@ -26,7 +27,7 @@ export function AsciiDiagram({ file, title }: AsciiDiagramProps) {
         console.error('AsciiDiagram fetch failed:', err)
       })
     return () => controller.abort()
-  }, [file])
+  }, [file, visible, loaded])
 
   return (
     <div className="ascii-diagram">
@@ -39,9 +40,9 @@ export function AsciiDiagram({ file, title }: AsciiDiagramProps) {
         <span className="diagram-title">{title}</span>
         <span className="diagram-toggle-state">{visible ? 'hide' : 'show'}</span>
       </button>
-      {visible && loaded && (
+      {visible && (
         <div className="ascii-diagram-content">
-          <pre>{content}</pre>
+          <pre>{loaded ? content : 'Загрузка...'}</pre>
         </div>
       )}
     </div>

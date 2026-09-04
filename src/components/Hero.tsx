@@ -59,7 +59,7 @@ export function Hero() {
           </div>
           <div className="avatar-container">
             <img
-              src={resolveAsset('/assets/avatar.jpg')}
+              src={resolveAsset('/assets/avatar.webp')}
               alt="Егор"
               className="avatar"
               loading="eager"

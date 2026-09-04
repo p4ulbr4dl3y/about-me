@@ -37,8 +37,8 @@ export const projects: Project[] = [
       { file: 'infrared-fusion.txt', title: 'infrared_fusion.txt' },
     ],
     images: [
-      { src: '/assets/colreg/original_result_no_expansion.jpg', alt: 'Детекция в ИК спектре' },
-      { src: '/assets/colreg/photo_result_nuc_at_2.5.jpg', alt: 'Детекция в RGB спектре' },
+      { src: '/assets/colreg/original_result_no_expansion.webp', alt: 'Детекция в ИК спектре' },
+      { src: '/assets/colreg/photo_result_nuc_at_2.5.webp', alt: 'Детекция в RGB спектре' },
     ],
   },
   {
@@ -52,8 +52,8 @@ export const projects: Project[] = [
       'Вся система спроектирована под жесткую экономию токенов: логика работы минимизирует число ходов LLM, отсекает холостые вызовы и не раздувает контекст. Внутри оркестрация субагентов, протокол MCP, скиллы и автоматические Git-чекпоинты для быстрого отката правок.',
     ],
     images: [
-      { src: '/assets/johnston/demo1.png', alt: 'Johnston — оркестрация субагентов и выполнение плана', fullWidth: true },
-      { src: '/assets/johnston/demo2.png', alt: 'Johnston — встроенный просмотр диффов изменений', fullWidth: true },
+      { src: '/assets/johnston/demo1.webp', alt: 'Johnston — оркестрация субагентов и выполнение плана', fullWidth: true },
+      { src: '/assets/johnston/demo2.webp', alt: 'Johnston — встроенный просмотр диффов изменений', fullWidth: true },
     ],
   },
   {
@@ -67,8 +67,8 @@ export const projects: Project[] = [
       'Все крутится локально, данные не уходят в облако. Готовый датасет сразу экспортируется в форматы YOLO и COCO.',
     ],
     images: [
-      { src: '/assets/autoboxer/demo1.png', alt: 'Autoboxer — пакетная разметка датасета', fullWidth: true },
-      { src: '/assets/autoboxer/demo2.png', alt: 'Autoboxer — интерактивный канвас-редактор', fullWidth: true },
+      { src: '/assets/autoboxer/demo1.webp', alt: 'Autoboxer — пакетная разметка датасета', fullWidth: true },
+      { src: '/assets/autoboxer/demo2.webp', alt: 'Autoboxer — интерактивный канвас-редактор', fullWidth: true },
     ],
   },
   {
@@ -98,7 +98,7 @@ export const projects: Project[] = [
       'Для работы сделал веб-интерфейс: общаешься с ассистентом в чате и сразу видишь готовую схему на экране.',
     ],
     images: [
-      { src: '/assets/text2circuit/demo.gif', alt: 'Интерактивный ИИ-ассистент для проектирования электрических схем', fullWidth: true },
+      { src: '/assets/text2circuit/demo.webp', alt: 'Интерактивный ИИ-ассистент для проектирования электрических схем', fullWidth: true },
     ],
   },
   {
@@ -114,7 +114,7 @@ export const projects: Project[] = [
       { file: 'lego-minifig-pipeline.txt', title: 'pipeline.txt' },
     ],
     images: [
-      { src: '/assets/lego-minifig/demo.jpg', alt: 'Интерфейс системы идентификации LEGO-минифигур' },
+      { src: '/assets/lego-minifig/demo.webp', alt: 'Интерфейс системы идентификации LEGO-минифигур' },
     ],
   },
   {
@@ -130,7 +130,7 @@ export const projects: Project[] = [
       { file: 'cellsistant-react-loop.txt', title: 'react_loop.txt' },
     ],
     images: [
-      { src: '/assets/cellsistant/demo.gif', alt: 'Cellsistant - демонстрация работы агента', fullWidth: true },
+      { src: '/assets/cellsistant/demo.webp', alt: 'Cellsistant - демонстрация работы агента', fullWidth: true },
     ],
   },
   {
@@ -144,7 +144,7 @@ export const projects: Project[] = [
       'Веса квантовал в GGUF q4_k_m: модель весит меньше двух гигабайт и быстро инферится на обычном процессоре без видеокарты.',
     ],
     images: [
-      { src: '/assets/chart-expert/demo.png', alt: 'Chart Expert - пример анализа графика' },
+      { src: '/assets/chart-expert/demo.webp', alt: 'Chart Expert - пример анализа графика' },
     ],
   },
   {
@@ -161,7 +161,7 @@ export const projects: Project[] = [
       { file: 'ds-factory-structure.txt', title: 'data_generation.txt' },
     ],
     images: [
-      { src: '/assets/datascience-expert/demo.gif', alt: 'DataScience Expert - демонстрация работы модели', fullWidth: true },
+      { src: '/assets/datascience-expert/demo.webp', alt: 'DataScience Expert - демонстрация работы модели', fullWidth: true },
     ],
   },
   {
@@ -193,7 +193,7 @@ export const projects: Project[] = [
       { file: 'ais-anomaly-architecture.txt', title: 'architecture.txt' },
     ],
     images: [
-      { src: '/assets/ais-anomaly/demo.png', alt: 'AIS Anomaly Detection - результаты анализа' },
+      { src: '/assets/ais-anomaly/demo.webp', alt: 'AIS Anomaly Detection - результаты анализа' },
     ],
   },
   {
@@ -210,7 +210,7 @@ export const projects: Project[] = [
       { file: 'colreg-expert-architecture.txt', title: 'architecture.txt' },
     ],
     images: [
-      { src: '/assets/colreg-expert/demo.png', alt: 'Colreg Expert System — интерфейс экспертной системы' },
+      { src: '/assets/colreg-expert/demo.webp', alt: 'Colreg Expert System — интерфейс экспертной системы' },
     ],
   },
   {
@@ -224,7 +224,7 @@ export const projects: Project[] = [
       'Для работы сделал веб-интерфейс: в no-code конструкторе собираешь схему нужных полей, загружаешь файл и на лету получаешь заполненную структуру.',
     ],
     images: [
-      { src: '/assets/doc2json/demo.gif', alt: 'Интерфейс системы извлечения структурированных данных doc2json', fullWidth: true },
+      { src: '/assets/doc2json/demo.webp', alt: 'Интерфейс системы извлечения структурированных данных doc2json', fullWidth: true },
     ],
   },
 ]

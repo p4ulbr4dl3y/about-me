@@ -27,6 +27,7 @@ export function ImageWithLightbox({ src, alt, caption, fullWidth }: ImageWithLig
           src={resolvedSrc}
           alt={alt}
           loading="lazy"
+          decoding="async"
           onLoad={() => setLoaded(true)}
           style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.3s ease' }}
         />

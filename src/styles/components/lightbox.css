@@ -53,6 +53,7 @@
 
 .image-wrapper {
     width: 100%;
+    min-height: 200px;
     height: 100%;
     overflow: hidden;
     background-color: #050505;
