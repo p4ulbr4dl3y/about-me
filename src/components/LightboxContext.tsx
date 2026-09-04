@@ -7,7 +7,7 @@ export function LightboxProvider({ children }: { children: ReactNode }) {
   const [alt, setAlt] = useState('')
   const [caption, setCaption] = useState<ReactNode>(null)
 
-  const openLightbox = useCallback((newSrc: string, newAlt: string, newCaption: ReactNode) => {
+  const openLightbox = useCallback((newSrc: string, newAlt: string, newCaption: ReactNode = null) => {
     setSrc(newSrc)
     setAlt(newAlt)
     setCaption(newCaption)

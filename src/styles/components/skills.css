@@ -25,8 +25,11 @@
     mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
     -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
     padding: 1.5rem 0;
-    pointer-events: none;
-    user-select: none;
+}
+
+.marquee-container:hover .track-left,
+.marquee-container:hover .track-right {
+    animation-play-state: paused;
 }
 
 .marquee-row {
@@ -87,8 +90,14 @@
     justify-content: center;
     gap: 0.5rem;
     white-space: nowrap;
-    pointer-events: none;
     font-size: 0.85rem;
+    cursor: default;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.skill-card:hover {
+    border-color: var(--accent);
+    background-color: rgba(88, 166, 255, 0.08);
 }
 
 .skill-card img {

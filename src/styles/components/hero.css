@@ -86,6 +86,56 @@
     margin-bottom: 0;
 }
 
+.hero-contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 40px;
+    padding: 0.5rem 0.85rem;
+    background: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-family: 'JetBrains Mono', monospace;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.contact-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background-color: rgba(88, 166, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+.contact-icon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.contact-arrow {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    transition: transform 0.2s ease, color 0.2s ease;
+    line-height: 1;
+}
+
+.contact-link:hover .contact-arrow {
+    color: var(--accent);
+    transform: translate(2px, -2px);
+}
+
 @media (max-width: 768px) {
     .hero-text h1 {
         font-size: 1.35rem;

@@ -5,7 +5,7 @@ export interface LightboxContextValue {
   src: string
   alt: string
   caption: ReactNode
-  openLightbox: (src: string, alt: string, caption: ReactNode) => void
+  openLightbox: (src: string, alt: string, caption?: ReactNode) => void
   closeLightbox: () => void
 }
 

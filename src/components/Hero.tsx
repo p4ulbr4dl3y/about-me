@@ -21,6 +21,39 @@ export function Hero() {
                 способы встроить их в реальные продукты.
               </p>
             </div>
+
+            <div className="hero-contacts">
+              <a
+                href="https://github.com/p4ulbr4dl3y"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-link"
+              >
+                <img src={resolveAsset('/assets/icons/github.svg')} alt="" className="contact-icon" width="16" height="16" />
+                <span>GitHub</span>
+                <span className="contact-arrow" aria-hidden="true">↗</span>
+              </a>
+              <a
+                href="https://huggingface.co/p4ulbr4dl3y"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-link"
+              >
+                <img src={resolveAsset('/assets/icons/huggingface.svg')} alt="" className="contact-icon" width="16" height="16" />
+                <span>Hugging Face</span>
+                <span className="contact-arrow" aria-hidden="true">↗</span>
+              </a>
+              <a
+                href="https://t.me/p4ulbr4dl3y"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-link"
+              >
+                <img src={resolveAsset('/assets/icons/telegram.svg')} alt="" className="contact-icon" width="16" height="16" />
+                <span>Telegram</span>
+                <span className="contact-arrow" aria-hidden="true">↗</span>
+              </a>
+            </div>
           </div>
           <div className="avatar-container">
             <img

@@ -9,6 +9,12 @@ export interface ProjectDiagram {
   title: string
 }
 
+export interface ProjectCertificate {
+  badge: string
+  title: string
+  src: string
+}
+
 export interface Project {
   id: string
   terminalTitle?: string
@@ -18,6 +24,7 @@ export interface Project {
   descriptionHtml?: string
   diagrams?: ProjectDiagram[]
   images?: ProjectImage[]
+  certificates?: ProjectCertificate[]
 }
 
 export const projects: Project[] = [
@@ -73,7 +80,7 @@ export const projects: Project[] = [
     terminalTitle: 'recommender-system — bash',
     title: 'recommender-system',
     description: [
-      'Рекомендательная система для e-commerce, построенная по Lambda-архитектуре. Объединяет потоковую и пакетную обработку данных для формирования гибридных рекомендаций.',
+      'Выпускной проект трека «Большие данные» ИТ-Академии Samsung. Рекомендательная система для e-commerce, построенная по Lambda-архитектуре. Объединяет потоковую и пакетную обработку данных для формирования гибридных рекомендаций.',
       'Архитектура состоит из трех слоев. Speed Layer обрабатывает события пользователей в реальном времени через Spark Structured Streaming, вычисляя популярные товары по категориям за скользящие 10-минутные окна и сохраняя результаты в Cassandra. Batch Layer выполняет тяжелые вычисления каждые 6 часов: обучает модель ALS для персонализированных рекомендаций, рассчитывает коллаборативную фильтрацию на основе меры Жаккара для поиска товаров, которые покупают вместе, и ежедневно запускает контентную фильтрацию через TF-IDF и LSH по названиям товаров. Serving Layer — это FastAPI-сервис, отдающий рекомендации через REST API с кэшированием в Redis.',
       'Весь стек разворачивается через Docker Compose и включает Kafka, Zookeeper, HDFS, Spark-кластер, Cassandra, MariaDB, Redis, а также Prometheus и Grafana для мониторинга. Планировщик на базе APScheduler управляет запуском Spark-задач по расписанию.',
     ],
@@ -81,6 +88,13 @@ export const projects: Project[] = [
       { file: 'recsys-speed-layer.txt', title: 'speed_layer.txt' },
       { file: 'recsys-batch-bi.txt', title: 'batch_bi.txt' },
       { file: 'recsys-batch-recsys.txt', title: 'batch_recsys.txt' },
+    ],
+    certificates: [
+      {
+        badge: '📜 С отличием',
+        title: 'Сертификат с отличием выпускника трека «Большие данные» ИТ-Академии Samsung',
+        src: '/assets/certificates/samsung-bigdata-honors-2026.png',
+      },
     ],
   },
   {
@@ -159,11 +173,23 @@ export const projects: Project[] = [
     description: [
       'Система интеллектуального поиска сообщений для корпоративного мессенджера VK Workspace. Задача хакатона ИТ-Академии Samsung 2026 - повысить точность поиска релевантных сообщений в корпоративных чатах, где поиском пользуется более 20% пользователей ежедневно.',
       'Реализован двухстадийный пайплайн. Этап индексации включает обогащение сообщений семантическими якорями (автор, дата, контекст треда), гибридное векторирование плотными и разреженными эмбеддингами, а также контекстное чанкирование скользящим окном 512/128 символов для сохранения связности диалогов. Этап поиска объединяет четыре независимых потока retrieval через Reciprocal Rank Fusion, после чего применяется кросс-энкодерное реранжирование моделью Llama-Nemotron-Reranker-1B и эвристический бустинг по сущностям, датам и автору запроса.',
-      'Итоговая метрика выросла с ~0.46 до 0.602. Решение заняло первое место на хакатоне.',
+      '1-е место на всероссийском хакатоне ИТ-Академии Samsung (рост целевой метрики с ~0.46 до 0.602).',
     ],
     diagrams: [
       { file: 'vk-search-indexing.txt', title: 'indexing.txt' },
       { file: 'vk-search-retrieval.txt', title: 'retrieval.txt' },
+    ],
+    certificates: [
+      {
+        badge: '🏆 1-е место (Всероссийский)',
+        title: 'Диплом победителя Всероссийского хакатона ИТ-Академии Samsung 2026',
+        src: '/assets/certificates/samsung-hackathon-2026.png',
+      },
+      {
+        badge: '🎖 Капитан (Диплом САФУ)',
+        title: 'Очный диплом за 1-е место команды «азаза» (капитан Сурвцев Егор), площадка САФУ',
+        src: '/assets/certificates/samsung-hackathon-saftu-2026.jpg',
+      },
     ],
   },
   {

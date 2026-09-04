@@ -1,0 +1,190 @@
+/* ========================================
+   Awards Section - Minimal Card Style
+   ======================================== */
+
+.awards-section {
+    padding: 3rem 2rem 3.5rem;
+}
+
+.awards-content {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.awards-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.awards-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.award-row {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1rem 1.25rem;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    background: transparent;
+    color: inherit;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+    min-height: 48px;
+    transition: background-color 0.15s ease, padding-left 0.15s ease;
+}
+
+.award-row:last-child {
+    border-bottom: none;
+}
+
+.award-row:hover {
+    background-color: rgba(88, 166, 255, 0.05);
+    padding-left: 1.5rem;
+}
+
+.award-row:hover .award-title {
+    color: #fff;
+}
+
+.award-row:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+}
+
+.award-year {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-variant-numeric: tabular-nums;
+    min-width: 2.75rem;
+    flex-shrink: 0;
+}
+
+.award-rank {
+    font-size: 0.82rem;
+    color: var(--accent);
+    white-space: nowrap;
+    min-width: 7.2rem;
+    flex-shrink: 0;
+}
+
+.award-bracket {
+    color: var(--text-secondary);
+    opacity: 0.45;
+}
+
+.award-title {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.15s ease;
+}
+
+.award-arrow {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+    margin-left: auto;
+    transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.award-row:hover .award-arrow {
+    color: var(--accent);
+    transform: translate(2px, -2px);
+}
+
+/* In-project certificate badges (used in ProjectCard) */
+.project-cert-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1.25rem;
+}
+
+.project-cert-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.85rem;
+    background: rgba(88, 166, 255, 0.06);
+    border: 1px solid rgba(88, 166, 255, 0.35);
+    border-radius: var(--radius);
+    color: var(--text-primary);
+    font-size: 0.82rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.project-cert-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(88, 166, 255, 0.14);
+    transform: translateY(-1px);
+}
+
+.project-cert-btn .cert-arrow {
+    font-size: 0.78rem;
+    color: var(--accent);
+    transition: transform 0.2s ease;
+}
+
+.project-cert-btn:hover .cert-arrow {
+    transform: translate(2px, -2px);
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+    .awards-section {
+        padding: 2rem 1.25rem 2.5rem;
+    }
+
+    .award-row {
+        display: grid;
+        grid-template-columns: auto auto 1fr;
+        grid-template-areas:
+            "year rank arrow"
+            "title title title";
+        row-gap: 0.35rem;
+        column-gap: 0.75rem;
+        align-items: center;
+        padding: 0.85rem 1rem;
+    }
+
+    .award-row:hover {
+        padding-left: 1rem;
+    }
+
+    .award-year {
+        grid-area: year;
+        min-width: auto;
+    }
+
+    .award-rank {
+        grid-area: rank;
+        min-width: auto;
+    }
+
+    .award-title {
+        grid-area: title;
+        white-space: normal;
+        font-size: 0.88rem;
+    }
+
+    .award-arrow {
+        grid-area: arrow;
+        justify-self: end;
+    }
+}

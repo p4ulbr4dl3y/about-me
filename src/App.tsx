@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { LightboxProvider } from './components/LightboxContext'
 import { Hero } from './components/Hero'
+import { AwardsSection } from './components/AwardsSection'
 import { SkillsSection } from './components/SkillsSection'
 import { ProjectsSection } from './components/ProjectsSection'
 import { Lightbox } from './components/Lightbox'
@@ -20,6 +21,9 @@ function App() {
       <main>
         <RevealSection>
           <Hero />
+        </RevealSection>
+        <RevealSection delay={100}>
+          <AwardsSection />
         </RevealSection>
         <RevealSection delay={100}>
           <SkillsSection />
