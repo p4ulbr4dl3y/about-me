@@ -15,7 +15,7 @@ export function ImageWithLightbox({ src, alt, caption, fullWidth }: ImageWithLig
   const resolvedSrc = resolveAsset(src)
 
   return (
-    <div className="inference-item" style={fullWidth ? { gridColumn: 'span 2' } : undefined}>
+    <div className={`inference-item ${fullWidth ? 'inference-item-full' : ''}`}>
       <button
         type="button"
         className="image-wrapper"

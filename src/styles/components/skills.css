@@ -67,9 +67,13 @@
     .marquee-container {
         mask-image: none;
         -webkit-mask-image: none;
-        overflow-x: auto;
         pointer-events: auto;
         user-select: auto;
+    }
+    .marquee-row {
+        overflow-x: auto;
+        scrollbar-width: thin;
+        -webkit-overflow-scrolling: touch;
     }
 }
 

@@ -23,12 +23,19 @@
     height: 100%;
 }
 
+.inference-item-full {
+    grid-column: span 2;
+}
+
 @media (max-width: 768px) {
     .inference-gallery-grid {
         grid-template-columns: 1fr;
     }
     .inference-gallery-grid .inference-item {
         aspect-ratio: auto;
+    }
+    .inference-item-full {
+        grid-column: auto;
     }
 }
 
@@ -169,14 +176,25 @@
 }
 
 @media (max-width: 768px) {
+    .lightbox-modal {
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 3.5rem 1rem 1.5rem;
+        justify-content: flex-start;
+    }
+    .lightbox-content {
+        max-height: 65vh;
+        flex-shrink: 0;
+    }
     .lightbox-close {
         top: calc(16px + env(safe-area-inset-top, 0px));
         right: calc(16px + env(safe-area-inset-right, 0px));
     }
     .lightbox-caption {
-        width: 92%;
+        width: 96%;
         padding: 1rem 0;
         font-size: 0.85rem;
+        flex-shrink: 0;
     }
 }
 
