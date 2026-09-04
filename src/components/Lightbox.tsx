@@ -37,7 +37,7 @@ export function Lightbox() {
   useEffect(() => {
     if (!isOpen) return
     previousFocusRef.current = document.activeElement as HTMLElement | null
-    closeBtnRef.current?.focus()
+    modalRef.current?.focus()
     return () => {
       previousFocusRef.current?.focus()
     }
@@ -48,6 +48,7 @@ export function Lightbox() {
   return (
     <div
       ref={modalRef}
+      tabIndex={-1}
       className="lightbox-modal"
       role="dialog"
       aria-modal="true"
