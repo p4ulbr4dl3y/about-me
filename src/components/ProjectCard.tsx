@@ -17,6 +17,15 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <div className="project-title-area">
           <h3>{project.title}</h3>
         </div>
+        {project.tags && project.tags.length > 0 && (
+          <div className="project-tags">
+            {project.tags.map(tag => (
+              <span key={tag} className="project-tag">
+                <span className="project-tag-hash">#</span>{tag}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="project-info-side">
