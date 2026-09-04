@@ -4,19 +4,28 @@ import { projects } from '../data/projects'
 export function ProjectsNav() {
   const [activeId, setActiveId] = useState<string>(projects[0]?.id || '')
   const navListRef = useRef<HTMLUListElement>(null)
+  const isProgrammaticScroll = useRef(false)
+  const scrollTimeout = useRef<number | null>(null)
 
   useEffect(() => {
     let ticking = false
 
     const handleScroll = () => {
+      if (isProgrammaticScroll.current) return
+
       if (!ticking) {
         window.requestAnimationFrame(() => {
+          if (isProgrammaticScroll.current) {
+            ticking = false
+            return
+          }
           let current = projects[0]?.id || ''
+          const navOffset = window.innerWidth <= 960 ? 90 : 160
           for (const p of projects) {
             const el = document.getElementById(p.id)
             if (el) {
               const elRect = el.getBoundingClientRect()
-              if (elRect.top <= 200) {
+              if (elRect.top <= navOffset) {
                 current = p.id
               }
             }
@@ -31,7 +40,12 @@ export function ProjectsNav() {
     window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll()
 
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (scrollTimeout.current !== null) {
+        window.clearTimeout(scrollTimeout.current)
+      }
+    }
   }, [])
 
   // Auto-scroll horizontal chips on mobile when activeId changes
@@ -39,16 +53,24 @@ export function ProjectsNav() {
     if (!navListRef.current) return
     const activeBtn = navListRef.current.querySelector<HTMLElement>('.projects-nav-link.active')
     if (activeBtn && window.innerWidth <= 960) {
-      activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' })
+      activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' })
     }
   }, [activeId])
 
   const handleItemClick = useCallback((id: string) => {
     const el = document.getElementById(id)
     if (!el) return
-    const top = el.getBoundingClientRect().top + window.scrollY - 30
-    window.scrollTo({ top, behavior: 'smooth' })
+    isProgrammaticScroll.current = true
     setActiveId(id)
+
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+
+    if (scrollTimeout.current !== null) {
+      window.clearTimeout(scrollTimeout.current)
+    }
+    scrollTimeout.current = window.setTimeout(() => {
+      isProgrammaticScroll.current = false
+    }, 800)
   }, [])
 
   return (
@@ -64,7 +86,6 @@ export function ProjectsNav() {
                 className={`projects-nav-link ${isActive ? 'active' : ''}`}
                 onClick={() => handleItemClick(project.id)}
                 aria-current={isActive ? 'true' : undefined}
-                title={project.title}
               >
                 <span className="projects-nav-prefix">{isActive ? '❯' : '·'}</span>
                 <span className="projects-nav-title">{project.title}</span>

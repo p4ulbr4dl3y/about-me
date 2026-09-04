@@ -118,24 +118,19 @@
     .projects-nav-list {
         flex-direction: row;
         border-left: none;
-        padding-left: 0;
-        padding-right: 2rem;
+        padding-left: 0.25rem;
+        padding-right: 1.5rem;
         gap: 0.5rem;
         overflow-x: auto;
         white-space: nowrap;
         padding-bottom: 0.25rem;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
         -webkit-overflow-scrolling: touch;
-        mask-image: linear-gradient(to right, black calc(100% - 36px), transparent 100%);
-        -webkit-mask-image: linear-gradient(to right, black calc(100% - 36px), transparent 100%);
     }
 
     .projects-nav-list::-webkit-scrollbar {
-        height: 3px;
-    }
-
-    .projects-nav-list::-webkit-scrollbar-thumb {
-        background: var(--border);
-        border-radius: 2px;
+        display: none;
     }
 
     .projects-nav-link {
