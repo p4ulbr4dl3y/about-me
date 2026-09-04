@@ -11,7 +11,6 @@ export interface ProjectDiagram {
 
 export interface Project {
   id: string
-  terminalTitle?: string
   title: string
   tags?: string[]
   description: string[]
@@ -24,7 +23,6 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 'colreg-vision-node',
-    terminalTitle: 'colreg-vision-node — bash',
     title: 'colreg-vision-node',
     tags: ['cv', 'yolo', 'efficientnet', 'sensor-fusion', 'mqtt'],
     description: [
@@ -43,7 +41,6 @@ export const projects: Project[] = [
   },
   {
     id: 'johnston',
-    terminalTitle: 'johnston — bash',
     title: 'johnston',
     tags: ['ai-agents', 'mcp', 'tui', 'cli', 'devtools'],
     description: [
@@ -58,7 +55,6 @@ export const projects: Project[] = [
   },
   {
     id: 'autoboxer',
-    terminalTitle: 'autoboxer — bash',
     title: 'autoboxer',
     tags: ['cv', 'vlm', 'auto-labeling', 'dataset-tools'],
     description: [
@@ -73,7 +69,6 @@ export const projects: Project[] = [
   },
   {
     id: 'recommender-system',
-    terminalTitle: 'recommender-system — bash',
     title: 'recommender-system',
     tags: ['big-data', 'recsys', 'spark', 'kafka', 'cassandra', 'fastapi'],
     description: [
@@ -89,7 +84,6 @@ export const projects: Project[] = [
   },
   {
     id: 'text2circuit',
-    terminalTitle: 'text2circuit — bash',
     title: 'text2circuit',
     tags: ['llm', 'mcp', 'distillation', 'circuit-design'],
     description: [
@@ -103,7 +97,6 @@ export const projects: Project[] = [
   },
   {
     id: 'lego-minifig-classifier',
-    terminalTitle: 'lego-minifig-classifier — bash',
     title: 'lego-minifig-classifier',
     tags: ['cv', 'segmentation', 'vector-search', 'faiss', 'siglip'],
     description: [
@@ -119,7 +112,6 @@ export const projects: Project[] = [
   },
   {
     id: 'cellsistant',
-    terminalTitle: 'cellsistant — bash',
     title: 'cellsistant',
     tags: ['ai-agents', 'jupyterlab', 'multimodal', 'tools'],
     description: [
@@ -135,7 +127,6 @@ export const projects: Project[] = [
   },
   {
     id: 'chart-expert',
-    terminalTitle: 'chart-expert — bash',
     title: 'chart-expert',
     tags: ['vlm', 'lora', 'unsloth', 'gguf', 'quantization'],
     description: [
@@ -149,7 +140,6 @@ export const projects: Project[] = [
   },
   {
     id: 'datascience-expert',
-    terminalTitle: 'datascience-expert — bash',
     title: 'datascience-expert',
     tags: ['llm', 'fine-tuning', 'lora', 'unsloth', 'data-science'],
     description: [
@@ -166,7 +156,6 @@ export const projects: Project[] = [
   },
   {
     id: 'vk-workspace-search',
-    terminalTitle: 'vk-workspace-search — bash',
     title: 'vk-workspace-search',
     tags: ['nlp', 'hybrid-search', 'reranking', 'vector-search', 'retrieval'],
     description: [
@@ -181,7 +170,6 @@ export const projects: Project[] = [
   },
   {
     id: 'ais-anomaly-detection',
-    terminalTitle: 'ais-anomaly-detection — bash',
     title: 'ais-anomaly-detection',
     tags: ['anomaly-detection', 'trajectories', 'maritime', 'deep-learning'],
     description: [
@@ -198,7 +186,6 @@ export const projects: Project[] = [
   },
   {
     id: 'colreg-expert-system',
-    terminalTitle: 'colreg-expert-system — bash',
     title: 'colreg-expert-system',
     tags: ['expert-systems', 'rule-engine', 'maritime', 'reasoning'],
     description: [
@@ -215,7 +202,6 @@ export const projects: Project[] = [
   },
   {
     id: 'doc2json',
-    terminalTitle: 'doc2json — bash',
     title: 'doc2json',
     tags: ['ocr', 'document-ai', 'vlm', 'map-reduce'],
     description: [
