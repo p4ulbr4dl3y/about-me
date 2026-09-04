@@ -1,5 +1,6 @@
 import { projects } from '../data/projects'
 import { ProjectCard } from './ProjectCard'
+import { ProjectsNav } from './ProjectsNav'
 
 export function ProjectsSection() {
   return (
@@ -7,10 +8,13 @@ export function ProjectsSection() {
       <div className="projects-content">
         <h2 className="section-title">projects</h2>
 
-        <div className="projects-list">
-          {projects.map(project => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
+        <div className="projects-layout">
+          <div className="projects-list">
+            {projects.map(project => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+          <ProjectsNav />
         </div>
       </div>
     </section>

@@ -12,7 +12,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const { openLightbox } = useLightbox()
 
   return (
-    <div className="project-card">
+    <div className="project-card" id={project.id}>
       <div className="project-header">
         <div className="project-title-area">
           <h3>{project.title}</h3>
