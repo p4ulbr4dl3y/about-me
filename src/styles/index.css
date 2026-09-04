@@ -2,6 +2,7 @@
    Portfolio Theme - Terminal Style
    ======================================== */
 
+@import './fonts.css';
 @import './variables.css';
 @import './components/layout.css';
 @import './components/terminal.css';
