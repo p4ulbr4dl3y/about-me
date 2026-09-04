@@ -105,45 +105,6 @@
     transform: translate(2px, -2px);
 }
 
-/* In-project certificate badges (used in ProjectCard) */
-.project-cert-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    margin-bottom: 1.25rem;
-}
-
-.project-cert-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.45rem 0.85rem;
-    background: rgba(88, 166, 255, 0.06);
-    border: 1px solid rgba(88, 166, 255, 0.35);
-    border-radius: var(--radius);
-    color: var(--text-primary);
-    font-size: 0.82rem;
-    font-family: inherit;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.project-cert-btn:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: rgba(88, 166, 255, 0.14);
-    transform: translateY(-1px);
-}
-
-.project-cert-btn .cert-arrow {
-    font-size: 0.78rem;
-    color: var(--accent);
-    transition: transform 0.2s ease;
-}
-
-.project-cert-btn:hover .cert-arrow {
-    transform: translate(2px, -2px);
-}
 
 /* Mobile responsive */
 @media (max-width: 640px) {
