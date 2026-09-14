@@ -46,4 +46,27 @@ describe('ImageWithLightbox + Lightbox', () => {
 
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
   })
+
+  it('closes lightbox via touch on close button', () => {
+    renderLightbox()
+    fireEvent.click(screen.getByRole('button', { name: 'Увеличить изображение: Скриншот' }))
+    expect(screen.getByRole('dialog')).toBeInTheDocument()
+
+    const closeBtn = screen.getByRole('button', { name: 'Закрыть' })
+    fireEvent.touchEnd(closeBtn)
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+  })
+
+  it('closes lightbox via tap on backdrop', () => {
+    renderLightbox()
+    fireEvent.click(screen.getByRole('button', { name: 'Увеличить изображение: Скриншот' }))
+    const dialog = screen.getByRole('dialog')
+    expect(dialog).toBeInTheDocument()
+
+    fireEvent.touchStart(dialog, { touches: [{ clientX: 50, clientY: 50 }] })
+    fireEvent.touchEnd(dialog, { changedTouches: [{ clientX: 52, clientY: 51 }] })
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+  })
 })

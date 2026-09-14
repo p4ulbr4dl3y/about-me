@@ -68,9 +68,15 @@
     white-space: nowrap;
 }
 
-.projects-nav-link:hover {
-    color: var(--text-primary);
-    transform: translateX(2px);
+@media (hover: hover) {
+    .projects-nav-link:hover {
+        color: var(--text-primary);
+        transform: translateX(2px);
+    }
+
+    .projects-nav-link:hover .projects-nav-prefix {
+        color: var(--text-secondary);
+    }
 }
 
 .projects-nav-link.active {
@@ -85,10 +91,6 @@
     transition: color 0.2s ease;
     flex-shrink: 0;
     width: 0.75rem;
-}
-
-.projects-nav-link:hover .projects-nav-prefix {
-    color: var(--text-secondary);
 }
 
 .projects-nav-link.active .projects-nav-prefix {
@@ -143,9 +145,11 @@
         font-size: 0.82rem;
     }
 
-    .projects-nav-link:hover {
-        transform: none;
-        border-color: var(--accent);
+    @media (hover: hover) {
+        .projects-nav-link:hover {
+            transform: none;
+            border-color: var(--accent);
+        }
     }
 
     .projects-nav-link.active {

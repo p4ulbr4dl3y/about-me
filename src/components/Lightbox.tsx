@@ -39,9 +39,41 @@ export function Lightbox() {
     previousFocusRef.current = document.activeElement as HTMLElement | null
     modalRef.current?.focus()
     return () => {
-      previousFocusRef.current?.focus()
+      previousFocusRef.current?.focus({ preventScroll: true })
     }
   }, [isOpen])
+
+  const touchStartPos = useRef<{ x: number; y: number } | null>(null)
+
+  const handleClose = (e?: React.SyntheticEvent) => {
+    if (e) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
+    closeLightbox()
+  }
+
+  const handleBackdropTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget && e.touches.length === 1) {
+      touchStartPos.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
+    } else {
+      touchStartPos.current = null
+    }
+  }
+
+  const handleBackdropTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget && touchStartPos.current && e.changedTouches.length === 1) {
+      const touch = e.changedTouches[0]
+      const dx = Math.abs(touch.clientX - touchStartPos.current.x)
+      const dy = Math.abs(touch.clientY - touchStartPos.current.y)
+      if (dx < 10 && dy < 10) {
+        e.preventDefault()
+        e.stopPropagation()
+        closeLightbox()
+      }
+    }
+    touchStartPos.current = null
+  }
 
   if (!isOpen) return null
 
@@ -54,14 +86,21 @@ export function Lightbox() {
       aria-modal="true"
       aria-label={alt || 'Просмотр изображения'}
       onClick={(e) => {
-        if (e.target === e.currentTarget) closeLightbox()
+        if (e.target === e.currentTarget) handleClose(e)
       }}
+      onTouchStart={handleBackdropTouchStart}
+      onTouchEnd={handleBackdropTouchEnd}
     >
       <button
         ref={closeBtnRef}
         type="button"
         className="lightbox-close"
-        onClick={closeLightbox}
+        onClick={handleClose}
+        onTouchEnd={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          handleClose(e)
+        }}
         aria-label="Закрыть"
       >
         &times;
