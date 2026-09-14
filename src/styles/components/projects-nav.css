@@ -9,7 +9,9 @@
     width: 210px;
     max-height: calc(100vh - 4rem);
     overflow-y: auto;
+    -webkit-user-select: none;
     user-select: none;
+    -webkit-touch-callout: none;
     padding-top: 0.25rem;
     scrollbar-width: none;
     -ms-overflow-style: none;

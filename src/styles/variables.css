@@ -26,6 +26,12 @@ html {
     scroll-behavior: smooth;
 }
 
+img {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
 body {
     background-color: var(--bg-color);
     color: var(--text-primary);

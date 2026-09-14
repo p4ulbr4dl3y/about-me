@@ -48,13 +48,27 @@ export function ProjectsNav() {
     }
   }, [])
 
-  // Auto-scroll horizontal chips on mobile when activeId changes
+  const isInitialMount = useRef(true)
+
+  // Auto-scroll horizontal chips on mobile when activeId changes (without scrolling window)
   useEffect(() => {
-    if (!navListRef.current) return
-    const activeBtn = navListRef.current.querySelector<HTMLElement>('.projects-nav-link.active')
-    if (activeBtn && window.innerWidth <= 960) {
-      activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' })
+    if (isInitialMount.current) {
+      isInitialMount.current = false
+      return
     }
+
+    const list = navListRef.current
+    if (!list || window.innerWidth > 960) return
+
+    const activeBtn = list.querySelector<HTMLElement>('.projects-nav-link.active')
+    if (!activeBtn) return
+
+    const listRect = list.getBoundingClientRect()
+    const btnRect = activeBtn.getBoundingClientRect()
+    const targetScrollLeft =
+      list.scrollLeft + (btnRect.left - listRect.left) - listRect.width / 2 + btnRect.width / 2
+
+    list.scrollTo({ left: targetScrollLeft, behavior: 'smooth' })
   }, [activeId])
 
   const handleItemClick = useCallback((id: string) => {
