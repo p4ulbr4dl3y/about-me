@@ -33,6 +33,14 @@ export const awards: Award[] = [
     certificateAlt: 'Сертификат с отличием трека «Большие данные» ИТ Академии Samsung 2026',
   },
   {
+    id: 'kosmohackathon-sfo-2026',
+    year: '2026',
+    rank: '3-е место',
+    title: 'КосмоХакатон Сибирского федерального округа',
+    certificateSrc: '/assets/certificates/kosmohackathon-sfo-3rd-place-2026.webp',
+    certificateAlt: 'Диплом III степени хакатона Сибирского федерального округа «КосмоХакатон», Красноярск 2026',
+  },
+  {
     id: 'mpit-hackathon-2025',
     year: '2025',
     rank: '2-е место',
